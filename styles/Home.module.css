@@ -22,11 +22,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90px;
+    width: 130px;
+}
+.navbarContainer .rightPart .addPost{
+    cursor: pointer;
+    font-size: 1.3rem;
+    transition: 1s all;
 }
 .navbarContainer .rightPart .homeIcon{
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    transition: 1s all;
+}
+.homeIcon:hover, .addPost:hover{
+    transform: scale(1.2);
 }
 .navbarContainer .rightPart .signinBtn{
     font-weight: 500;
@@ -147,7 +156,14 @@
     font-size: 1.5rem;
     margin: 0px 10px;
     cursor: pointer;
-    transition: 1s all;
+    transition: 1s transform;
+}
+.loveFillIcon{
+    font-size: 1.5rem;
+    margin: 0px 10px;
+    cursor: pointer;
+    color: 	#d60841;
+    transition: transform 1s;
 }
 .commentIcon{
     font-size: 1.2rem;
@@ -161,16 +177,22 @@
     cursor: pointer;
     transition: 1s all;
 }
-.loveIcon:hover, .commentIcon:hover, .whatsappIcon:hover{
+.loveIcon:hover, .loveFillIcon:hover, .commentIcon:hover, .whatsappIcon:hover{
     transform: scale(1.15);
 }
 .likeCounts{
     font-size: .9rem;
     padding: 5px 25px 10px;
+    display: flex;
+    align-items: center;
+}
+.likeCounts div:last-child{
+    margin-left: 10px;
+    font-size: .75rem;
+    color: rgb(84, 84, 84); 
 }
 .comment{
     display: flex;
-    align-items: center;
     padding: 3px 25px;
     justify-content: space-between;
 }
@@ -181,14 +203,23 @@
     font-size: .73rem;
     color: rgb(84, 84, 84);  
 }
+.commentForm button{
+    cursor: pointer;
+}
+.commentAuthorDP{
+    border-radius: 50%;
+    margin-right: 10px;
+}
 .commentAuthorName{
     font-weight: 600;
     font-size: .9rem;
+    margin-top: 5px;
 }
 .commentAuthorMessage{
     color: rgb(84, 84, 84);   
     margin-left: 10px;
     font-size: .8rem;
+    margin-top: 5px;
 }
 .post .commentForm{
     display: flex;
@@ -197,16 +228,20 @@
     margin-top: 8px;
     justify-content: space-around;
 }
+.post .commentForm form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .post .commentForm .emojiIcon{
     font-size: 1.2rem;
     position: relative;
     top: 5px;
 }
-.post .commentForm input{
-    padding: 7px 10px;
+.commentInput{
+    padding: 0px 4px;
     width: 520px;
     margin-left: 15px;
-    border: 0px;
     outline: none;
     margin-right: 20px;
 }
@@ -215,6 +250,9 @@
     border: 0px;
     color: #046FDB;
     font-weight: 600;
+}
+.post .commentForm button:disabled{
+    color: #6f7174;
 }
 /* Account Details =========================== */
 .accountDp{
@@ -248,4 +286,186 @@
     color: rgb(117, 0, 0);
     font-weight: 600;
     border-radius: 4px;
+}
+/* modal -------------------------------- */
+.modal{
+    width: 400px;
+    height: 365px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: white;
+    border: 1px solid rgb(156, 156, 156);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: none;
+    border-radius: 4px;
+    padding: 10px 10px;
+}
+.modal button{
+    padding: 8px 20px;
+    background-color: #3388dd;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.modal input[type="text"]{
+    padding: 6px 20px;
+    font-size: .85rem;
+    border: 0px;
+    outline: none;
+    position: relative;
+    top: 10px;
+    width: 300px;
+    text-align: center;
+}
+.modal button:disabled{
+    background-color: #6f7174;
+}
+.uploadedImage{
+    width: 100%;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.uploadedImageBox{
+    width: 350px;
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imageIcon{
+    cursor: pointer;
+}
+
+/* Progress ------------------------------------------ */
+.progressContainer{
+    border: 1px solid rgb(197, 197, 197);
+    width: 250px;
+    border-radius: 3px;
+    position: relative;
+    top: 15px;
+}
+.progressBar{
+    height: 8px;
+    background-color: #14A44D;
+    border-radius: 3px;
+    /* border: 1px solid red; */
+}
+
+@media (max-width: 1000px){
+    .homeContainer{
+        flex-direction: column;
+    }
+    .account{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 100px auto;
+        height: 85px;
+        width: 320px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+    }
+    .feeds{
+        margin-top: 95px;
+        width: 600px;
+    }
+    .commentInput{
+        padding: 0px 4px;
+        width: 470px;
+        margin-left: 0px;
+    }
+}
+@media (max-width: 625px){
+    .feeds{
+        margin-top: 95px;
+        width: 400px;
+    }
+    .commentInput{
+        padding: 0px 3px;
+        width: 300px;
+        margin-left: 0px;
+    }
+    .post .imageBox{
+        width: 100%;
+        min-height: 230px;
+    }
+}
+@media (max-width: 415px){
+    
+    .account{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 100px auto;
+        height: 85px;
+        width: 320px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+    }
+    .feeds{
+        margin-top: 95px;
+        width: 350px;
+    }
+    .commentInput{
+        padding: 0px 3px;
+        width: 255px;
+        margin-left: 0px;
+    }
+    .post .imageBox{
+        width: 100%;
+        min-height: 200px;
+    }
+    .commentAuthorDP{
+        border-radius: 50%;
+        margin-right: 10px;
+        height: 30px;
+        width: 30px;
+    }
+    .commentAuthorName{
+        font-weight: 600;
+        font-size: .65rem;
+        margin-top: 5px;
+    }
+    .commentAuthorMessage{
+        color: rgb(84, 84, 84);   
+        margin-left: 10px;
+        font-size: .6rem;
+        margin-top: 5px;
+    }
+    .comment .commentRight{
+        font-size: .53rem;
+        position: relative;
+        top: 5px;
+    }
+    .modal{
+        width: 340px;
+        height: 360px;
+    }
+    .uploadedImageBox{
+        width: 300px;
+        height: 230px;
+    }
+    .uploadedImage{
+        width: 100%;
+        cursor: pointer;
+        height: 230px;
+        border-radius: 3px;
+    }
 }

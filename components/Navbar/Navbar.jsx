@@ -1,11 +1,12 @@
 import React from "react";
 import { ImHome } from "react-icons/im";
+import { IoIosAddCircleOutline } from "react-icons/io";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import Image from "next/image";
 import {useSession, signOut} from "next-auth/react";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const {data: session} = useSession();
 
   return (
@@ -13,6 +14,7 @@ export default function Navbar() {
       <div className={styles.navbarContainer}>
         <div className={styles.leftPart}>ArioGram</div>
         <div className={styles.rightPart}>
+            <IoIosAddCircleOutline className={styles.addPost} onClick={()=>{props.onCreate();}} />
           <Link href="/">
             <ImHome className={styles.homeIcon} />
           </Link>

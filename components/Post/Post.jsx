@@ -1,61 +1,126 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "../../styles/Home.module.css";
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import {MdOutlineFavoriteBorder} from "react-icons/md"
-import {FaRegCommentAlt} from "react-icons/fa"
-import {BsWhatsapp, BsEmojiSmile} from "react-icons/bs"
+import {MdOutlineFavoriteBorder, MdFavorite} from "react-icons/md";
+import {FaRegCommentAlt} from "react-icons/fa";
+import {BsWhatsapp} from "react-icons/bs";
+import InputEmoji from 'react-input-emoji';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+import {getTimestampDifference} from "../../helper/timestamp-utils";
 
-export default function Post() {
+export default function Post(props) {
     const {data: session} = useSession();
+
+    const [text, setText] = useState("");
+    const [timeDiff, setTimeDiff] = useState("");
+    const postData = props.post.data();
+    const postId = props.post.id;
+    
+
+    const [comments, setComments] = useState([]);
+    const [likes, setLikes] = useState([]);
+    const [hasLiked, setHasLiked] = useState(false);
+    
+    useEffect(()=>{
+        onSnapshot(query(collection(db, "posts", postId, "comments"), orderBy("timestamp", "desc")), (snapshot)=>{
+            setComments(snapshot.docs);
+        })
+        const foundTimestamp = postData.timestamp? postData.timestamp.seconds: new Date().getTime()/1000;
+        const requiredTimeDiff = getTimestampDifference(foundTimestamp);
+        setTimeDiff(requiredTimeDiff);
+
+        onSnapshot(collection(db, "posts", postId, "likes"), (snapshot)=>{
+            setLikes(snapshot.docs);
+        })
+
+    }, [])
+
+    useEffect(()=>{
+        if(session){
+            setHasLiked( likes.findIndex(like => like.data().userEmail===session.user.email)!==-1 );
+        }
+    },[likes, session])
+
+
+    async function uploadComment(){
+        if(text.trim().length===0){
+            return;
+        }
+        const commentText = text;
+        await addDoc(collection(db, "posts", postId, "comments"), {
+            author: session.user.name,
+            authorDP: session.user.image,
+            message: commentText,
+            timestamp: serverTimestamp()
+        });
+        setText("");
+    }
+    async function handleCommentSubmit(e){
+        e.preventDefault();
+        await uploadComment();
+    }
+
+    async function handleLikePost(){
+        if(!hasLiked){
+            await setDoc(doc(db, "posts", postId, "likes", session.user.email), {
+                userEmail: session.user.email
+            });
+        }
+        else{
+            await deleteDoc(doc(db, "posts", postId, "likes", session.user.email));
+        }
+    }
 
   return (
     <>
         <div className={styles.post}>
             <div className={styles.authorDetails}>
-                {session && <Image src={session.user.image} height={42} width={42} alt="post_dp" className={styles.postDp}/>}
-                {session && <div className={styles.authorNameEmail}><div>{session.user.name}</div> <div>{session.user.email}</div></div>}
+                <Image src={postData.dp} height={42} width={42} alt="post_dp" className={styles.postDp}/>
+                <div className={styles.authorNameEmail}><div>{postData.name}</div> <div>{postData.email}</div></div>
             </div>
             <div className={styles.imageBox}>
-                <Image src="https://firebasestorage.googleapis.com/v0/b/insta-v4.appspot.com/o/posts%2Fdv7gVNlxMd2NM2mQnO9F%2Fimage?alt=media&token=afcb8ef1-6caf-4fb4-ab88-ade24df12bf5" height={200} width={200} alt="post" className={styles.postImage} objectFit="cover"/>
+                <Image src={postData.image} height={200} width={200} alt="post" className={styles.postImage}/>
             </div>
             <div className={styles.postCaption}>
-                Awesome food, I am eating Now.
+                {postData.caption}
             </div>
-            <div className={styles.likeCommentShare}>
-                <MdOutlineFavoriteBorder className={styles.loveIcon}/>
-                <FaRegCommentAlt className={styles.commentIcon}/>
-                <BsWhatsapp className={styles.whatsappIcon}/>
-            </div>
+            {session &&
+                <div className={styles.likeCommentShare}>
+                    {!hasLiked && <MdOutlineFavoriteBorder className={styles.loveIcon} onClick={handleLikePost}/>}
+                    {hasLiked && <MdFavorite className={styles.loveFillIcon} onClick={handleLikePost}/>}
+                    <FaRegCommentAlt className={styles.commentIcon}/>
+                    <BsWhatsapp className={styles.whatsappIcon}/>
+                </div>
+            }
             <div className={styles.likeCounts}>
-                <div>356 likes</div>
+                <div>{likes.length} likes</div>
+                <div>{timeDiff}</div>
             </div>
             <div className={styles.commentSection}>
-                <div className={styles.comment}>
-                    <div className={styles.commentLeft}>
-                        <div className={styles.commentAuthorName}>gojosatoru</div>
-                        <div className={styles.commentAuthorMessage}>Nice picture</div>
-                    </div>
-                    <div className={styles.commentRight}>
-                        17 hours ago
-                    </div>
-                </div>
-                <div className={styles.comment}>
-                    <div className={styles.commentLeft}>
-                        <div className={styles.commentAuthorName}>arindam369</div>
-                        <div className={styles.commentAuthorMessage}>Awesome</div>
-                    </div>
-                    <div className={styles.commentRight}>
-                        2 days ago
-                    </div>
-                </div>
+                {comments.map((comment)=>{
+                    return (
+                            <div className={styles.comment} key={comment.id}>
+                                <div className={styles.commentLeft}>
+                                    <div> <Image src={comment.data().authorDP} height={40} width={40} alt="comment_author" className={styles.commentAuthorDP}/></div>
+                                    <div className={styles.commentAuthorName}>{comment.data().author}</div>
+                                    <div className={styles.commentAuthorMessage}>{comment.data().message}</div>
+                                </div>
+                                <div className={styles.commentRight}>
+                                    {comment.data().timestamp && getTimestampDifference(comment.data().timestamp.seconds)}
+                                </div>
+                            </div>
+                    )
+                })}
             </div>
             {session && 
             <div className={styles.commentForm}>
-                <form>
-                    <BsEmojiSmile className={styles.emojiIcon}/>
-                    <input type="text" placeholder='Add a comment...'/>
-                    <button>Post</button>
+                <form onSubmit={handleCommentSubmit}>
+                    <div className={styles.commentInput}>
+                        <InputEmoji value={text} onChange={setText} cleanOnEnter onEnter={uploadComment} placeholder="Add a comment..." height={10} fontSize={12}/>
+                    </div>
+                    <button type="submit" disabled={text.trim().length===0}>Post</button>
                 </form>
             </div>}
         </div>
