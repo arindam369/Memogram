@@ -3,13 +3,20 @@ import { getProviders, signIn } from "next-auth/react";
 import styles from "../../styles/Home.module.css";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function signInPage({ providers }) {
   return (
     <>
+      <Head>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+        <title>Memogram | Login</title>
+      </Head>
       <div className={styles.loginContainer}>
-
-        <h3>Welcome to <b> Ariogram </b></h3>
+        <h3>
+          Welcome to <b> Memogram </b>
+        </h3>
 
         {Object.values(providers).map((provider) => {
           return (
@@ -27,7 +34,9 @@ export default function signInPage({ providers }) {
           );
         })}
 
-        <h5><Link href="/">Return to Home </Link></h5>
+        <h5>
+          <Link href="/">Return to Home </Link>
+        </h5>
       </div>
     </>
   );

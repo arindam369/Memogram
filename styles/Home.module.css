@@ -59,6 +59,7 @@
     background: -webkit-linear-gradient(#feaea7, #F88379,  #7e342d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-size: 2.2rem;
 }
 .loginContainer h5{
     color: #046FDB;

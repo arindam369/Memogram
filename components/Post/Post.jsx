@@ -95,7 +95,7 @@ export default function Post(props) {
                 </div>
             }
             <div className={styles.likeCounts}>
-                <div>{likes.length} likes</div>
+                {likes.length>0 && <div>{likes.length} likes</div>}
                 <div>{timeDiff}</div>
             </div>
             <div className={styles.commentSection}>
