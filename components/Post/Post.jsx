@@ -139,12 +139,6 @@ export default function Post(props) {
               onClick={handleDeletePost}
             />
           )}
-          {
-            <FiDelete
-              className={styles.deleteIcon}
-              onClick={handleDeletePost}
-            />
-          }
         </div>
         <div className={styles.imageBox}>
           <Image
