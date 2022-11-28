@@ -116,6 +116,13 @@
     display: flex;
     align-items: center;
     padding: 8px 20px;
+    position: relative;   
+}
+.deleteIcon{
+    position: absolute;
+    right: 10px;
+    font-size: 1.3rem;
+    cursor: pointer;
 }
 .post .authorDetails .postDp{
     border-radius: 50%;
@@ -245,6 +252,7 @@
     margin-left: 15px;
     outline: none;
     margin-right: 20px;
+    z-index: 0;
 }
 .post .commentForm button{
     background-color: #fff;
@@ -291,7 +299,7 @@
 /* modal -------------------------------- */
 .modal{
     width: 400px;
-    height: 365px;
+    height: 385px;
     position: absolute;
     top: 0;
     left: 0;
@@ -330,20 +338,33 @@
 .modal button:disabled{
     background-color: #6f7174;
 }
+
+
+
 .uploadedImage{
     width: 100%;
     cursor: pointer;
     border-radius: 3px;
+    min-height: 200px;
+    object-fit: cover;
 }
 .uploadedImageBox{
     width: 350px;
-    height: 230px;
+    min-height: 230px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .imageIcon{
     cursor: pointer;
+}
+.imgError{
+    color: rgb(201, 0, 0);
+    font-size: .74rem;
+    position: relative;
+    margin: 0px;
+    top: -15px;
+    height: 20px;
 }
 
 /* Progress ------------------------------------------ */
@@ -360,7 +381,13 @@
     border-radius: 3px;
     /* border: 1px solid red; */
 }
-
+@media (max-width: 1245px){
+    .commentInput{
+        padding: 0px 4px;
+        width: 420px;
+        margin-left: 0px;
+    }
+}
 @media (max-width: 1000px){
     .homeContainer{
         flex-direction: column;

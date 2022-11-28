@@ -25,6 +25,7 @@ export default function HomePage() {
   const [progress, setProgress] = useState(0);
   const [caption, setCaption] = useState("");
   const [posts, setPosts] = useState([]);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(()=>{
     const unsubscribe = onSnapshot(query(collection(db, "posts"), orderBy("timestamp", "desc")), (snapshot)=>{
@@ -36,14 +37,24 @@ export default function HomePage() {
 
 
   function handleFileChange(e) {
-    const reader = new FileReader();
-    if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
+    const fileName = e.target.files[0].name;
+    const fileTypeArray = fileName.split(".");
+    const fileMimeType = fileTypeArray[fileTypeArray.length-1];
+    if(fileMimeType==="JPG" || fileMimeType==="jpg" || fileMimeType==="PNG" || fileMimeType==="png" || fileMimeType==="jfif" || fileMimeType==="JFIF" || fileMimeType==="JPEG"||fileMimeType==="jpeg"){
+      setImgError(false);
+      const reader = new FileReader();
+      if (e.target.files[0]) {
+        reader.readAsDataURL(e.target.files[0]);
+      }
+      reader.onload = (readerEvent) => {
+        setImageFile(readerEvent.target.result);
+        setFile(e.target.files[0]);
+      };
     }
-    reader.onload = (readerEvent) => {
-      setImageFile(readerEvent.target.result);
-      setFile(e.target.files[0]);
-    };
+    else{
+      setImgError(true);
+      return;
+    }
   }
 
   async function handlePost() {
@@ -64,6 +75,7 @@ export default function HomePage() {
             setFile(null);
             setImageFile(null);
             setVisibleModal(false);
+            setCaption("");
           }, 1000);
         }
       },
@@ -80,6 +92,7 @@ export default function HomePage() {
             timestamp: serverTimestamp(),
             image: downloadUrl
           });
+    
 
         });
       }
@@ -151,6 +164,7 @@ export default function HomePage() {
                 ref={fileRef}
                 onChange={handleFileChange}
               />
+              <h6 className={styles.imgError}> {imgError && "Sorry, only jpg/jpeg/png/jfif images are allowed"} </h6>
               <input
                 type="text"
                 placeholder="Write a caption . . ."
