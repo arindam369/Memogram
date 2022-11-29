@@ -40,7 +40,7 @@ export default function Post(props) {
     onSnapshot(
       query(
         collection(db, "posts", postId, "comments"),
-        orderBy("timestamp", "desc")
+        orderBy("timestamp")
       ),
       (snapshot) => {
         setComments(snapshot.docs);
