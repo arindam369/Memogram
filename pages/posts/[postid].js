@@ -44,13 +44,16 @@ export default function PostPage(){
                 {post? <link rel="icon" type="image/x-icon" href={post.data().image} /> : <link rel="icon" type="image/x-icon" href="https://memogram-nine.vercel.app/favicon.ico" />}
                 <meta property="og:image:width" content="400" />
                 <meta property="og:image:height" content="300" />
+                {post && <meta property="og:title" content={post.data().name} />}
+                {post && <meta
+                    property="og:description"
+                    content={post.data().caption}
+                />}
             </Head>
             <Navbar disableCreatePost="true"/>
             <div className={styles.postContainer + " "+styles.deleteMarginTop}>
                 <div className={styles.feeds}>
-                    {post && <Post post={post} onClick={handleOnClickPost}/>
-                    
-                    }
+                    {post && <Post post={post} onClick={handleOnClickPost}/>}
                     {postNotFound && <div className={styles.errorBox}>
                         <h3 className={styles.error}>Post Not Found</h3>
                     </div>}
