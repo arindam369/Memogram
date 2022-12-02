@@ -12,6 +12,7 @@ export default function signInPage({ providers }) {
         <link rel="manifest" href="../manifest.json" />
         <link rel="icon" type="image/x-icon" href="../favicon.ico" />
         <title>Memogram | Login</title>
+        <link rel="icon" type="image/x-icon" href="../favicon.ico" />
       </Head>
       <div className={styles.loginContainer}>
         <h3>
