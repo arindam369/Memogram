@@ -41,7 +41,7 @@ export default function PostPage(){
                 <link rel="manifest" href="../manifest.json" />
                 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
                 <title>Memogram | Post</title>
-                {post? <link rel="icon" type="image/x-icon" href={post.data().image} /> : <link rel="icon" type="image/x-icon" href="../favicon.ico" />}
+                {post? <link rel="icon" type="image/x-icon" href={post.data().image} /> : <link rel="icon" type="image/x-icon" href="https://memogram-nine.vercel.app/favicon.ico" />}
             </Head>
             <Navbar disableCreatePost="true"/>
             <div className={styles.postContainer + " "+styles.deleteMarginTop}>

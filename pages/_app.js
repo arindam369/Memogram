@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps:{session, ...pageProps} }) {
           />
           <meta property="og:url" content="https://memogram.vercel.app" />
           <meta property="og:site_name" content="Memogram" />
-          <meta property="og:image" itemprop="image" content="favicon.ico"/>
+          <meta property="og:image" itemprop="image" content="https://memogram-nine.vercel.app/favicon.ico"/>
           <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
           <link rel="icon" type="image/x-icon" href="favicon.ico" />
         </Head>
