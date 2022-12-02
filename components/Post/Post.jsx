@@ -187,7 +187,6 @@ export default function Post(props) {
               <div className={styles.comment} key={comment.id}>
                 <div className={styles.commentLeft}>
                   <div>
-                    {" "}
                     <Image
                       src={comment.data().authorDP}
                       height={40}

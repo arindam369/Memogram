@@ -43,7 +43,7 @@ export default function PostPage(){
                 <title>Memogram | Post</title>
             </Head>
             <Navbar disableCreatePost="true"/>
-            <div className={styles.postContainer}>
+            <div className={styles.postContainer + " "+styles.deleteMarginTop}>
                 <div className={styles.feeds}>
                     {post && <Post post={post} onClick={handleOnClickPost}/>
                     

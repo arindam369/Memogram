@@ -416,6 +416,9 @@
         width: 470px;
         margin-left: 0px;
     }
+    .deleteMarginTop{
+        margin-top: -100px;
+    }
 }
 @media (max-width: 625px){
     .feeds{
@@ -426,6 +429,9 @@
         padding: 0px 3px;
         width: 300px;
         margin-left: 0px;
+    }
+    .post{
+        width: 400px;
     }
     .post .imageBox{
         width: 100%;
@@ -460,6 +466,9 @@
     .post .imageBox{
         width: 100%;
         min-height: 200px;
+    }
+    .post{
+        width: 330px;
     }
     .commentAuthorDP{
         border-radius: 50%;
