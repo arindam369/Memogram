@@ -123,7 +123,7 @@ export default function Post(props) {
     });
   }
   function handleShareWhatsapp(){
-    const wpUrl = `whatsapp://send?text=See this Memogram post by ${postData.name.split(" ")[0]}: https://memogram-nine.vercel.app/posts/${postData.postID}`;
+    const wpUrl = `whatsapp://send?text=See this Memogram post by ${postData.name.split(" ")[0]}: https://memogram-nine.vercel.app/posts/${postId}`;
     window.open(wpUrl);
   }
 
