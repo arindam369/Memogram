@@ -143,6 +143,7 @@
 .post .imageBox{
     width: 100%;
     min-height: 350px;
+    cursor: pointer;
 }
 .post .imageBox .postImage{
     object-fit: contain;
@@ -496,4 +497,25 @@
         height: 230px;
         border-radius: 3px;
     }
+}
+
+/* /post/[postid] page css -----------*/
+.postContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 80px;
+}
+
+.errorBox{
+    display: flex;
+    justify-content: center;
+}
+.error{
+    text-align: center;
+    background-color: #F67A7A;
+    color: white;
+    padding: 40px;
+    width: 360px;
+    border-radius: 6px;
 }

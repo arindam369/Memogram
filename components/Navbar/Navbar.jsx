@@ -12,9 +12,12 @@ export default function Navbar(props) {
   return (
     <>
       <div className={styles.navbarContainer}>
-        <div className={styles.leftPart}>Memogram</div>
+        <div className={styles.leftPart}>
+          <Link href="/"> Memogram </Link>
+        </div>
         <div className={styles.rightPart}>
-            <IoIosAddCircleOutline className={styles.addPost} onClick={()=>{props.onCreate();}} />
+            {props.disableCreatePost==="true"?"": 
+            <IoIosAddCircleOutline className={styles.addPost} onClick={()=>{props.onCreate();}} />}
           <Link href="/">
             <ImHome className={styles.homeIcon} />
           </Link>

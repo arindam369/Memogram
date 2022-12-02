@@ -35,6 +35,11 @@ export default function Post(props) {
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
+  const [visibleCommentBox, setVisibleCommentBox] = useState(false);
+
+  function toggleVisibleCommentBox(){
+    setVisibleCommentBox(!visibleCommentBox);
+  }
 
   useEffect(() => {
     onSnapshot(
@@ -117,6 +122,10 @@ export default function Post(props) {
       }
     });
   }
+  function handleShareWhatsapp(){
+    const wpUrl = `whatsapp://send?text=See this Memogram post by ${postData.name.split(" ")[0]}: https://memogram-nine.vercel.app/posts/${postData.postID}`;
+    window.open(wpUrl);
+  }
 
   return (
     <>
@@ -140,7 +149,7 @@ export default function Post(props) {
             />
           )}
         </div>
-        <div className={styles.imageBox}>
+        <div className={styles.imageBox} onClick={()=>{props.onClick(props.post.id);}}>
           <Image
             src={postData.image}
             height={200}
@@ -164,12 +173,12 @@ export default function Post(props) {
                 onClick={handleLikePost}
               />
             )}
-            <FaRegCommentAlt className={styles.commentIcon} />
-            <BsWhatsapp className={styles.whatsappIcon} />
+            <FaRegCommentAlt className={styles.commentIcon} onClick={toggleVisibleCommentBox} />
+            <BsWhatsapp className={styles.whatsappIcon} onClick={handleShareWhatsapp}/>
           </div>
         )}
         <div className={styles.likeCounts}>
-          {likes.length > 0 && <div>{likes.length} likes</div>}
+          {likes.length > 0 && <div>{likes.length} {likes.length===1?"like":"likes"}</div>}
           <div>{timeDiff}</div>
         </div>
         <div className={styles.commentSection}>
@@ -202,7 +211,7 @@ export default function Post(props) {
             );
           })}
         </div>
-        {session && (
+        {session && visibleCommentBox && (
           <div className={styles.commentForm}>
             <form onSubmit={handleCommentSubmit}>
               <div className={styles.commentInput}>

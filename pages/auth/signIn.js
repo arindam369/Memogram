@@ -9,7 +9,7 @@ export default function signInPage({ providers }) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="manifest" href="../manifest.json" />
         <link rel="icon" type="image/x-icon" href="../favicon.ico" />
         <title>Memogram | Login</title>
       </Head>

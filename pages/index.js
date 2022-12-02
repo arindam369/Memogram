@@ -13,11 +13,11 @@ import { ref, uploadBytesResumable } from "firebase/storage";
 import Progress from "../components/Progress/Progress";
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import Router from "next/router";
+import Head from "next/head";
 
 export default function HomePage() {
   const { data: session } = useSession();
-  // console.log(session);
-
   const [visibleModal, setVisibleModal] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [file, setFile] = useState(null);
@@ -92,16 +92,22 @@ export default function HomePage() {
             timestamp: serverTimestamp(),
             image: downloadUrl
           });
-    
-
         });
       }
     );
   }
 
+  function handleOnClickPost(postId){
+    Router.push(`/posts/${postId}`)
+  }
+
   return (
     <>
+      <Head>
+        <link rel="manifest" href="manifest.json" />
+      </Head>
       <Navbar
+        disableCreatePost="false"
         onCreate={() => {
           setVisibleModal(true);
         }}
@@ -112,7 +118,7 @@ export default function HomePage() {
           {
             posts.map((post)=>{
               return (
-                <Post post={post} key={post.id}/>
+                <Post post={post} key={post.id} onClick={handleOnClickPost}/>
               )
             })
           }

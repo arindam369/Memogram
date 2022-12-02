@@ -28,7 +28,6 @@ function MyApp({ Component, pageProps:{session, ...pageProps} }) {
           <meta property="og:site_name" content="Memogram" />
           <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
           <link rel="icon" type="image/x-icon" href="favicon.ico" />
-          <link rel="manifest" href="manifest.json" />
         </Head>
       <div className="components">
         <Component {...pageProps}/>
