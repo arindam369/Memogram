@@ -42,6 +42,8 @@ export default function PostPage(){
                 <link rel="icon" type="image/x-icon" href="../favicon.ico" />
                 <title>Memogram | Post</title>
                 {post? <link rel="icon" type="image/x-icon" href={post.data().image} /> : <link rel="icon" type="image/x-icon" href="https://memogram-nine.vercel.app/favicon.ico" />}
+                <meta property="og:image:width" content="400" />
+                <meta property="og:image:height" content="300" />
             </Head>
             <Navbar disableCreatePost="true"/>
             <div className={styles.postContainer + " "+styles.deleteMarginTop}>
