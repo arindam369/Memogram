@@ -23,6 +23,7 @@ import { db } from "../../firebase";
 import { getTimestampDifference } from "../../helper/timestamp-utils";
 import { FiDelete } from "react-icons/fi";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 export default function Post(props) {
   const { data: session } = useSession();
@@ -36,6 +37,8 @@ export default function Post(props) {
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
   const [visibleCommentBox, setVisibleCommentBox] = useState(false);
+
+  const router = useRouter();
 
   function toggleVisibleCommentBox(){
     setVisibleCommentBox(!visibleCommentBox);
@@ -126,6 +129,9 @@ export default function Post(props) {
     const wpUrl = `whatsapp://send?text=See this Memogram post by ${postData.name.split(" ")[0]}: https://memogram-nine.vercel.app/posts/${postId}`;
     window.open(wpUrl);
   }
+  function goToProfileHandler(username){
+    router.push(`/${username}`);
+  }
 
   return (
     <>
@@ -137,9 +143,13 @@ export default function Post(props) {
             width={42}
             alt="post_dp"
             className={styles.postDp}
+            onClick={()=>{goToProfileHandler(postData.email.split("@")[0])}}
           />
           <div className={styles.authorNameEmail}>
-            <div>{postData.name}</div> <div>{postData.email}</div>
+            <div 
+            onClick={()=>{goToProfileHandler(postData.email.split("@")[0])}}
+            >
+              {postData.name}</div> <div>{postData.email}</div>
           </div>
 
           {session && session.user.email === postData.email && (

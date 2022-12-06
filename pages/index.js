@@ -9,12 +9,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { storage } from "../firebase";
 import { getDownloadURL } from "firebase/storage";
-import { ref, uploadBytesResumable } from "firebase/storage";
+import { ref as ref_storage, uploadBytesResumable } from "firebase/storage";
 import Progress from "../components/Progress/Progress";
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import Router from "next/router";
 import Head from "next/head";
+import {getDatabase, ref as ref_database, set} from "firebase/database";
 
 export default function HomePage() {
   const { data: session } = useSession();
@@ -27,12 +28,39 @@ export default function HomePage() {
   const [posts, setPosts] = useState([]);
   const [imgError, setImgError] = useState(false);
 
+  const database = getDatabase();
+
   useEffect(()=>{
     const unsubscribe = onSnapshot(query(collection(db, "posts"), orderBy("timestamp", "desc")), (snapshot)=>{
       setPosts(snapshot.docs);
     })
     return unsubscribe;
   },[])
+
+  // store data if session changes
+  // we will store user profile where key=emailID
+  useEffect(()=>{
+    async function addProfileData(session){
+      const username = session.user.email.split("@")[0];
+      set(ref_database(database, 'profiles/'+username), {
+        name: session.user.name,
+        email: session.user.email,
+        dp: session.user.image
+      })
+      .then(() => {
+        console.log("Data saved successfully!");
+      })
+      .catch((error) => {
+        console.log("The write failed...");
+      });
+
+    }
+    if(session){
+      console.log(session);
+      addProfileData(session);
+    }
+    
+  }, [])
 
 
 
@@ -60,7 +88,7 @@ export default function HomePage() {
   async function handlePost() {
     const { name, lastModified } = file;
     const filePath = `assets/${name}_${lastModified}`;
-    const folderRef = ref(storage, filePath);
+    const folderRef = ref_storage(storage, filePath);
 
     const uploadedFile = uploadBytesResumable(folderRef, file);
     uploadedFile.on(

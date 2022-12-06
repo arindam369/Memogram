@@ -126,6 +126,7 @@
 }
 .post .authorDetails .postDp{
     border-radius: 50%;
+    cursor: pointer;
 }
 .post .authorDetails .authorNameEmail{
     display: flex;
@@ -136,6 +137,7 @@
 }
 .post .authorDetails .authorNameEmail div:first-child{
     font-weight: 700;
+    cursor: pointer;
 }
 .post .authorDetails .authorNameEmail div:last-child{
     color: rgb(84, 84, 84);
@@ -268,6 +270,7 @@
 .accountDp{
     border-radius: 50%;
     margin-right: 10px;
+    cursor: pointer;
 }
 .accountProfile{
     display: flex;
@@ -468,7 +471,7 @@
         min-height: 200px;
     }
     .post{
-        width: 330px;
+        width: 350px;
     }
     .commentAuthorDP{
         border-radius: 50%;
@@ -527,4 +530,149 @@
     padding: 40px;
     width: 360px;
     border-radius: 6px;
+}
+
+
+/* Profile Page ------------------------------------------ */
+.profilePage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profileContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px 40px;
+    border-radius: 5px;
+}
+.profileLeft{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.profileLeft .profileUsername{
+    font-size: 1.1rem;
+    margin: 10px 0px;
+}
+.profileRight{
+    width: 500px;
+    height: 246px;
+    padding: 30px 0px;
+}
+.profileDp{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+.postFollowerFollowing{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.postFollowerFollowingData{
+    margin: 2px 20px;
+}
+.profileDetails{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profileData{
+    margin-top: 20px;
+}
+.profileDetails .profileUserNameData{
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: .9rem;
+}
+.profileDetails .profileUserBio{
+    font-size: .85rem;
+}
+.myPostContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myPostContainer .myPostHeading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: rgb(73, 73, 73);
+    margin-top: 10px;
+}
+.myPostContainer .myPostHeading h4{
+    margin-left: 10px;
+}
+@media(max-width: 815px){
+    .profileRight{
+        width: 400px;
+        height: 246px;
+        padding: 30px 0px;
+    }
+    .profileDp{
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+    }
+}
+@media(max-width: 715px){
+    .profileRight{
+        width: 330px;
+        height: 246px;
+        padding: 30px 0px;
+    }
+    .profileDp{
+        border-radius: 50%;
+        width: 130px;
+        height: 130px;
+    }
+}
+@media(max-width: 600px){
+    .profileRight{
+        width: 280px;
+        height: 246px;
+        padding: 50px 20px;
+    }
+    .profileDp{
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    .profileContainer{
+        padding: 20px 30px;
+    }
+    .profileLeft .profileUsername{
+        font-size: .9rem;
+        margin: 10px 0px;
+    }
+}
+@media(max-width: 495px){
+    .profileContainer{
+        flex-direction: column;
+    }
+    .profileRight{
+        width: 280px;
+        height: 180px;
+        padding: 50px 20px;
+    }
+    .profileDp{
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    .profileContainer{
+        padding: 20px 30px;
+    }
+    .profileLeft .profileUsername{
+        font-size: .9rem;
+        margin: 10px 0px;
+    }
+    .postFollowerFollowing{
+        margin-bottom: 10px;
+        margin-top: -15px;
+    }
 }
