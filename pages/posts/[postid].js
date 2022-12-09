@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Post from "../../components/Post/Post";
 import styles from "../../styles/Home.module.css";
 import Head from "next/head";
+import Swal from "sweetalert2";
 
 export default function PostPage(){
     const router = useRouter();
@@ -35,6 +36,26 @@ export default function PostPage(){
         return;
     }
 
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+    function copyToClipboard(postId){
+        navigator.clipboard.writeText(`https://memogram-nine.vercel.app/posts/${postId}`)
+        Toast.fire({
+          icon: 'success',
+          title: 'Copied to Clipboard'
+        })
+      }
+
     return (
         <>
             <Head>
@@ -53,7 +74,7 @@ export default function PostPage(){
             <Navbar disableCreatePost="true"/>
             <div className={styles.postContainer + " "+styles.deleteMarginTop}>
                 <div className={styles.feeds}>
-                    {post && <Post post={post} onClick={handleOnClickPost}/>}
+                    {post && <Post post={post} onClick={handleOnClickPost} onCopy={copyToClipboard}/>}
                     {postNotFound && <div className={styles.errorBox}>
                         <h3 className={styles.error}>Post Not Found</h3>
                     </div>}

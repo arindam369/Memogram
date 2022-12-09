@@ -69,7 +69,7 @@ export default function HomePage() {
         dp: session.user.image
       })
       .then(() => {
-        console.log("Data saved successfully!");
+        // console.log("Data saved successfully!");
       })
       .catch((error) => {
         console.log("The write failed...");
