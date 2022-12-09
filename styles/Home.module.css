@@ -120,7 +120,7 @@
 }
 .deleteIcon{
     position: absolute;
-    right: 10px;
+    right: 20px;
     font-size: 1.3rem;
     cursor: pointer;
 }
@@ -342,7 +342,44 @@
 .modal button:disabled{
     background-color: #6f7174;
 }
+.postEditModal{
+    width: 320px;
+    height: 210px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: white;
+    border: 1px solid rgb(156, 156, 156);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-align: center;
+}
+.postModalEditList{
 
+}
+.postModalEditList li{
+    list-style: none;
+    font-size: .86rem;
+    padding: 10px 80px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+.postModalEditList li:hover{
+    background-color: rgb(237, 237, 237);
+}
+.postModalEditList .modalDeleteBtn{
+    color: #EE4B2B;
+    font-weight: 700;
+    font-size: .9rem;
+}
 
 
 .uploadedImage{

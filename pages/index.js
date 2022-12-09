@@ -16,6 +16,7 @@ import { db } from "../firebase";
 import Router from "next/router";
 import Head from "next/head";
 import {getDatabase, ref as ref_database, set} from "firebase/database";
+import Swal from "sweetalert2";
 
 export default function HomePage() {
   const { data: session } = useSession();
@@ -37,6 +38,26 @@ export default function HomePage() {
     return unsubscribe;
   },[])
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+
+  const customStyles = {
+    overlay:{
+      background: "rgba(0,0,0,0.65)",
+      zIndex: "100"
+    }
+  };
+
   // store data if session changes
   // we will store user profile where key=emailID
   useEffect(()=>{
@@ -56,7 +77,6 @@ export default function HomePage() {
 
     }
     if(session){
-      console.log(session);
       addProfileData(session);
     }
     
@@ -128,6 +148,13 @@ export default function HomePage() {
   function handleOnClickPost(postId){
     Router.push(`/posts/${postId}`)
   }
+  function copyToClipboard(postId){
+    navigator.clipboard.writeText(`https://memogram-nine.vercel.app/posts/${postId}`)
+    Toast.fire({
+      icon: 'success',
+      title: 'Copied to Clipboard'
+    })
+  }
 
   return (
     <>
@@ -146,7 +173,7 @@ export default function HomePage() {
           {
             posts.map((post)=>{
               return (
-                <Post post={post} key={post.id} onClick={handleOnClickPost}/>
+                <Post post={post} key={post.id} onClick={handleOnClickPost} onCopy={copyToClipboard}/>
               )
             })
           }
@@ -164,6 +191,7 @@ export default function HomePage() {
           }}
           className={styles.modal}
           ariaHideApp={false}
+          style={customStyles}
         >
           {session && (
             <>

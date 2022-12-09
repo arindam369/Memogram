@@ -21,9 +21,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { getTimestampDifference } from "../../helper/timestamp-utils";
-import { FiDelete } from "react-icons/fi";
+import {BsThreeDots} from "react-icons/bs"
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import Modal from "react-modal";
 
 export default function Post(props) {
   const { data: session } = useSession();
@@ -37,11 +38,16 @@ export default function Post(props) {
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
   const [visibleCommentBox, setVisibleCommentBox] = useState(false);
+  const [visiblePostEditModal, setVisiblePostEditModal] = useState(false);
 
   const router = useRouter();
 
   function toggleVisibleCommentBox(){
     setVisibleCommentBox(!visibleCommentBox);
+  }
+
+  function togglePostEditModal(){
+    setVisiblePostEditModal(!visiblePostEditModal);
   }
 
   useEffect(() => {
@@ -133,8 +139,35 @@ export default function Post(props) {
     router.push(`/${username}`);
   }
 
+  const customStyles = {
+    overlay:{
+      background: "rgba(0,0,0,0.65)",
+      zIndex: "100"
+    }
+  };
+
   return (
     <>
+        <Modal
+          isOpen={visiblePostEditModal}
+          onRequestClose={() => {
+            togglePostEditModal();
+          }}
+          className={styles.postEditModal}
+          ariaHideApp={false}
+          style={customStyles}
+        >
+          <div className={styles.postModalEditList}>
+          {session && session.user.email === postData.email && (
+            <li className={styles.modalDeleteBtn} onClick={handleDeletePost}>Delete</li>
+          )}
+            <li onClick={()=>{props.onClick(props.post.id)}}>View Post</li>
+            <li onClick={handleShareWhatsapp}>Share via WhatsApp</li>
+            <li onClick={()=>{props.onCopy(props.post.id)}}>Copy Link</li>
+            <li onClick={togglePostEditModal}>Cancel</li>
+          </div>
+        </Modal>
+
       <div className={styles.post}>
         <div className={styles.authorDetails}>
           <Image
@@ -152,12 +185,7 @@ export default function Post(props) {
               {postData.name}</div> <div>{postData.email}</div>
           </div>
 
-          {session && session.user.email === postData.email && (
-            <FiDelete
-              className={styles.deleteIcon}
-              onClick={handleDeletePost}
-            />
-          )}
+          <BsThreeDots className={styles.deleteIcon} onClick={togglePostEditModal} />
         </div>
         <div className={styles.imageBox} onClick={()=>{props.onClick(props.post.id);}}>
           <Image
