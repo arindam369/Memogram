@@ -161,9 +161,9 @@ export default function Post(props) {
           {session && session.user.email === postData.email && (
             <li className={styles.modalDeleteBtn} onClick={handleDeletePost}>Delete</li>
           )}
-            <li onClick={()=>{props.onClick(props.post.id)}}>View Post</li>
+            <li onClick={()=>{props.onClick(props.post.id); setVisiblePostEditModal(false);}}>View Post</li>
             <li onClick={handleShareWhatsapp}>Share via WhatsApp</li>
-            <li onClick={()=>{props.onCopy(props.post.id)}}>Copy Link</li>
+            <li onClick={()=>{props.onCopy(props.post.id); setVisiblePostEditModal(false);}}>Copy Link</li>
             <li onClick={togglePostEditModal}>Cancel</li>
           </div>
         </Modal>
