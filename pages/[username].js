@@ -7,7 +7,7 @@ import { getAllProfiles, getProfileData } from "../helper/api-utils";
 export default function ProfilePage(props){
     const {profileData} = props;
 
-    console.log(profileData);
+    // console.log(profileData);
     return (
         <>
             <Navbar disableCreatePost="true"/>
@@ -56,7 +56,6 @@ export async function getStaticProps(context) {
 }
 export async function getStaticPaths() {
     const profilesArray = await getAllProfiles();
-    console.log(profilesArray);
     const profile_path = await profilesArray.map((profile) => ({
       params: { username: profile.email.split("@")[0] },
     }));
