@@ -18,3 +18,30 @@ a {
 .components{
   margin-top: 95px;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(173, 173, 173);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(134, 134, 134);
+}
+
+.ReactModal__Content {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: all 500ms ease-in-out;
+}
+.ReactModal__Content--after-open {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.ReactModal__Content--before-close {
+  opacity: 0;
+  transform: translateY(-100px);
+}

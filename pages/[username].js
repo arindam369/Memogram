@@ -3,11 +3,29 @@ import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import {BsFillGridFill} from "react-icons/bs";
 import { getAllProfiles, getProfileData } from "../helper/api-utils";
+import { useState, useEffect } from "react";
+import PostImage from "../components/Post/PostImage";
+import { collection, onSnapshot, where } from "firebase/firestore";
+import { query } from "firebase/database";
+import { db } from "../firebase";
 
 export default function ProfilePage(props){
     const {profileData} = props;
 
-    // console.log(profileData);
+    console.log(profileData);
+
+    const [userPosts, setUserPosts] = useState([]);
+
+    useEffect(()=>{
+        const unsubscribe = onSnapshot(query(collection(db, "posts"), where("email", "==", profileData.email)), (snapshot)=>{
+          setUserPosts(snapshot.docs);
+        })
+        return unsubscribe;
+      },[])
+
+
+      
+
     return (
         <>
             <Navbar disableCreatePost="true"/>
@@ -19,6 +37,11 @@ export default function ProfilePage(props){
                     </div>
 
                     <div className={styles.profileRight}>
+                        <div className={styles.editProfile}>
+                            <button className={styles.editProfileBtn}>
+                            Edit Profile
+                            </button>
+                        </div>
                         <div className={styles.postFollowerFollowing}>
                             <div className={styles.postFollowerFollowingData}> <b>155</b> posts</div>
                             <div className={styles.postFollowerFollowingData}> <b>678</b> followers</div>
@@ -40,6 +63,16 @@ export default function ProfilePage(props){
                     <BsFillGridFill/>
                     <h4>My Posts</h4>
                 </div>
+
+                <div className={styles.myFeeds}>
+                {
+                    userPosts.map((post)=>{
+                    return (
+                        <PostImage post={post} key={post.id}/>
+                    )
+                    })
+                }
+        </div>
 
             </div>
         </>
