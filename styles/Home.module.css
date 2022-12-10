@@ -430,6 +430,14 @@
     top: -15px;
     height: 20px;
 }
+.imgError2{
+    color: rgb(201, 0, 0);
+    font-size: .7rem;
+    position: relative;
+    margin: 0px;
+    top: 25px;
+    height: 20px;
+}
 
 /* Progress ------------------------------------------ */
 .progressContainer{
@@ -967,4 +975,60 @@
         width: 325px;
         height: 425px;
     }
+}
+
+/* editProfile modal ------------------------------ */
+.editProfileModal{
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: white;
+    border: 1px solid rgb(156, 156, 156);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-align: center;
+}
+.editProfileImageBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.editProfileDp{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+.editProfileModal button{
+    padding: 8px 20px;
+    background-color: #3388dd;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 60px;
+}
+.editProfileModal input[type="text"]{
+    padding: 6px 20px;
+    font-size: .85rem;
+    border: 0px;
+    outline: none;
+    position: relative;
+    top: 60px;
+    width: 200px;
+    text-align: center;;
+}
+.editProfileModal button:disabled{
+    background-color: #6f7174;
 }

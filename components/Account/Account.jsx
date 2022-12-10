@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getProfileData } from "../../helper/api-utils";
 
 export default function Account() {
   const { data: session } = useSession();
@@ -12,6 +13,16 @@ export default function Account() {
   function goToProfileHandler(username){
     router.push(`/${username}`);
   }
+  const [postAuthorDp, setPostAuthorDp] = useState(null);
+
+  useEffect(()=>{
+    async function getPostUserDp(){
+      const postProfileData = await getProfileData(session.user.email.split("@")[0]);
+      const postProfileDp = postProfileData && await postProfileData.dp;
+      setPostAuthorDp(postProfileDp);
+    }
+    getPostUserDp();
+  }, [])
 
   return (
     <>
@@ -19,7 +30,7 @@ export default function Account() {
         <div className={styles.accountProfile}>
           {session && (
             <Image
-              src={session.user.image}
+              src={postAuthorDp? postAuthorDp: session.user.image}
               height={50}
               width={50}
               alt="account_dp"

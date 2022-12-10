@@ -17,6 +17,7 @@ import Router from "next/router";
 import Head from "next/head";
 import {getDatabase, ref as ref_database, set} from "firebase/database";
 import Swal from "sweetalert2";
+import { getProfileData } from "../helper/api-utils";
 
 export default function HomePage() {
   const { data: session } = useSession();
@@ -63,18 +64,21 @@ export default function HomePage() {
   useEffect(()=>{
     async function addProfileData(session){
       const username = session.user.email.split("@")[0];
-      set(ref_database(database, 'profiles/'+username), {
-        name: session.user.name,
-        email: session.user.email,
-        dp: session.user.image
-      })
-      .then(() => {
-        // console.log("Data saved successfully!");
-      })
-      .catch((error) => {
-        console.log("The write failed...");
+      await getProfileData(session.user.email.split("@")[0]).then((profileArray)=>{
+        if(!profileArray){
+          set(ref_database(database, 'profiles/'+username), {
+            name: session.user.name,
+            email: session.user.email,
+            dp: session.user.image
+          })
+          .then(() => {
+            console.log("Data saved successfully!");
+          })
+          .catch((error) => {
+            console.log("The write failed...");
+          });
+        }
       });
-
     }
     if(session){
       addProfileData(session);

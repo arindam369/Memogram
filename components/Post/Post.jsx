@@ -25,6 +25,7 @@ import {BsThreeDots} from "react-icons/bs"
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import Modal from "react-modal";
+import { getProfileData } from "../../helper/api-utils";
 
 export default function Post(props) {
   const { data: session } = useSession();
@@ -71,6 +72,8 @@ export default function Post(props) {
     });
   }, []);
 
+  const [postAuthorDp, setPostAuthorDp] = useState(null);
+
   useEffect(() => {
     if (session) {
       setHasLiked(
@@ -80,6 +83,15 @@ export default function Post(props) {
       );
     }
   }, [likes, session]);
+
+  useEffect(()=>{
+    async function getPostUserDp(){
+      const postProfileData = await getProfileData(postData.email.split("@")[0]);
+      const postProfileDp = postProfileData && await postProfileData.dp;
+      setPostAuthorDp(postProfileDp);
+    }
+    getPostUserDp();
+  }, [])
 
   async function uploadComment() {
     if (text.trim().length === 0) {
@@ -171,7 +183,7 @@ export default function Post(props) {
       <div className={styles.post}>
         <div className={styles.authorDetails}>
           <Image
-            src={postData.dp}
+            src={postAuthorDp? postAuthorDp : postData.dp}
             height={42}
             width={42}
             alt="post_dp"
