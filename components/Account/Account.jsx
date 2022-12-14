@@ -17,12 +17,15 @@ export default function Account() {
 
   useEffect(()=>{
     async function getPostUserDp(){
-      const postProfileData = await getProfileData(session.user.email.split("@")[0]);
-      const postProfileDp = postProfileData && await postProfileData.dp;
-      setPostAuthorDp(postProfileDp);
+      if(session){
+        const postProfileData = await getProfileData(session.user.email.split("@")[0]);
+        const postProfileDp = postProfileData && await postProfileData.dp;
+        setPostAuthorDp(postProfileDp);
+      }
     }
     getPostUserDp();
-  }, [])
+  }, [postAuthorDp, session])
+
 
   return (
     <>
