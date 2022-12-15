@@ -38,6 +38,15 @@ export default function ProfilePage(props) {
     setBio(profileData.bio);
   }, []);
 
+  useEffect(()=>{
+    async function getPostUserDp(){
+      const postProfileData = await  getProfileData(profileData.email.split("@")[0]);
+      const postProfileDp = postProfileData && await postProfileData.dp;
+      setProfileDp(postProfileDp);
+    }
+    getPostUserDp();
+  }, [])
+
   const database = getDatabase();
 
   const fileRef = useRef(null);
