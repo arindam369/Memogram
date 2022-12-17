@@ -1075,8 +1075,34 @@
 }
 .profileNotFound{
     display: flex;
+    justify-content: space-between;
+    background-color: white;
+    width: 570px;
+    align-items: center;
+    border-radius: 12px;
+    padding: 30px 20px;
+    margin-top: 20px;
+}
+.profileNotFoundPage{
+    display: flex;
     justify-content: center;
     align-items: center;
+}
+.profileErrorImage{
+    height: 250px;
+    width: 250px;
+}
+.profileError{
+    font-size: .9rem;
+    margin-left: 15px;
+    margin-top: 40px;
+}
+.profileError h2{
+    margin-bottom: 0px;
+}
+.profileError h5{
+    margin-top: 6px;
+    color: rgb(155, 155, 155);
 }
 @media (max-width: 600px){
     .profileNotFound .error{
@@ -1087,5 +1113,39 @@
     .profileNotFound .error{
         font-size: 1rem;
         margin-top: -20px;
+    }
+}
+@media(max-width: 600px){
+    .profileErrorImage{
+        height: 200px;
+        width: 240px;
+    }
+    .profileError{
+        font-size: .9rem;
+        margin-left: 5px;
+        margin-top: 0px;
+        text-align: center;
+    }
+    
+    .profileNotFound{
+        width: 400px;
+        flex-direction: column;
+    }
+}
+@media(max-width: 420px){
+    .profileErrorImage{
+        height: 200px;
+        width: 240px;
+    }
+    .profileError{
+        font-size: .8rem;
+        margin-left: 5px;
+        margin-top: 0px;
+        text-align: center;
+    }
+    
+    .profileNotFound{
+        width: 340px;
+        flex-direction: column;
     }
 }

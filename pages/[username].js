@@ -238,7 +238,7 @@ export default function ProfilePage(props) {
       </Modal>
 
       <Navbar disableCreatePost="true" />
-      <div className={styles.profilePage}>
+      {profileData && <div className={styles.profilePage}>
         <div className={styles.profileContainer}>
           <div className={styles.profileLeft}>
             {profileData && (
@@ -282,12 +282,6 @@ export default function ProfilePage(props) {
                 <b>500</b> following
               </div>
             </div> */}
-            {!profileData && 
-            <div className={styles.profileNotFound}>
-              <h2 className={styles.error}>Profile Not Found</h2>
-            </div>
-
-            }
 
             <div className={styles.profileDetails}>
               <div className={styles.profileData}>
@@ -304,7 +298,19 @@ export default function ProfilePage(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
+
+      {!profileData && 
+            <div className={styles.profileNotFoundPage}>
+              <div className={styles.profileNotFound}>
+                <Image src="/images/errorPage.png" height={300} width={300} alt="profileNotFound" className={styles.profileErrorImage}></Image>
+                <div className={styles.profileError}>
+                  <h2>Profile Not Found</h2>
+                  <h5>Sorry, but we can&apos;t find the profile you are looking for . . .</h5>
+                </div>
+              </div>
+            </div>
+      }
 
       {profileData && 
       <div className={styles.myPostContainer}>
