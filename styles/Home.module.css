@@ -1073,3 +1073,19 @@
     color: rgb(87, 87, 87);
     margin-right: 8px;
 }
+.profileNotFound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 600px){
+    .profileNotFound .error{
+        font-size: 1rem;
+    }
+}
+@media (max-width: 495px){
+    .profileNotFound .error{
+        font-size: 1rem;
+        margin-top: -20px;
+    }
+}

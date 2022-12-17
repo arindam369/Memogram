@@ -5,7 +5,7 @@ import { BsFillGridFill } from "react-icons/bs";
 import { getAllProfiles, getProfileData } from "../helper/api-utils";
 import { useState, useEffect, useRef } from "react";
 import PostImage from "../components/Post/PostImage";
-import { collection, onSnapshot, where } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, where } from "firebase/firestore";
 import { query } from "firebase/database";
 import { db } from "../firebase";
 import { useSession } from "next-auth/react";
@@ -15,7 +15,6 @@ import Progress from "../components/Progress/Progress";
 import { storage } from "../firebase";
 import { getDownloadURL } from "firebase/storage";
 import { ref as ref_storage, uploadBytesResumable } from "firebase/storage";
-import { toast } from "react-toastify";
 
 export default function ProfilePage(props) {
   const { profileData } = props;
@@ -34,15 +33,19 @@ export default function ProfilePage(props) {
 
 
   useEffect(() => {
-    setProfileDp(profileData.dp);
-    setBio(profileData.bio);
+    if(profileData){
+      setProfileDp(profileData.dp);
+      setBio(profileData.bio);
+    }
   }, []);
 
   useEffect(()=>{
     async function getPostUserDp(){
-      const postProfileData = await  getProfileData(profileData.email.split("@")[0]);
-      const postProfileDp = postProfileData && await postProfileData.dp;
-      setProfileDp(postProfileDp);
+      if(profileData){
+        const postProfileData = await getProfileData(profileData.email.split("@")[0]);
+        const postProfileDp = postProfileData && await postProfileData.dp;
+        setProfileDp(postProfileDp);
+      }
     }
     getPostUserDp();
   }, [])
@@ -145,13 +148,19 @@ export default function ProfilePage(props) {
   }
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      query(collection(db, "posts"), where("email", "==", profileData.email)),
-      (snapshot) => {
-        setUserPosts(snapshot.docs);
-      }
-    );
-    return unsubscribe;
+    if(profileData){
+      const unsubscribe = onSnapshot(
+        query(collection(db, "posts"), where("email", "==", profileData.email)),
+        (snapshot) => {
+          const sortedArray = snapshot.docs.sort((a,b)=>{
+            const currTime = new Date().getTime()/1000;
+            return a.data().timestamp-currTime < b.data().timestamp-currTime?1:-1;
+          })
+          setUserPosts(sortedArray);
+        }
+      );
+      return unsubscribe;
+    }
   }, []);
 
   const { data: session } = useSession();
@@ -166,6 +175,7 @@ export default function ProfilePage(props) {
       zIndex: "100",
     },
   };
+
 
   return (
     <>
@@ -248,7 +258,7 @@ export default function ProfilePage(props) {
           </div>
 
           <div className={styles.profileRight}>
-            {session && session.user.email === profileData.email && (
+            {session && profileData && session.user.email === profileData.email && (
               <div className={styles.editProfile}>
                 <button
                   className={styles.editProfileBtn}
@@ -272,6 +282,12 @@ export default function ProfilePage(props) {
                 <b>500</b> following
               </div>
             </div> */}
+            {!profileData && 
+            <div className={styles.profileNotFound}>
+              <h2 className={styles.error}>Profile Not Found</h2>
+            </div>
+
+            }
 
             <div className={styles.profileDetails}>
               <div className={styles.profileData}>
@@ -290,6 +306,7 @@ export default function ProfilePage(props) {
         </div>
       </div>
 
+      {profileData && 
       <div className={styles.myPostContainer}>
         <div className={styles.myPostHeading}>
           <BsFillGridFill />
@@ -302,6 +319,7 @@ export default function ProfilePage(props) {
           })}
         </div>
       </div>
+      }
     </>
   );
 }
@@ -310,15 +328,14 @@ export async function getStaticProps(context) {
   const { params } = context;
   const username = params.username;
   const profileData = await getProfileData(username);
-  console.log(profileData.dp);
   const notFound = profileData ? false : true;
 
-  return { props: { profileData: profileData }, notFound };
+  return { props: { profileData: profileData || null} };
 }
 export async function getStaticPaths() {
   const profilesArray = await getAllProfiles();
   const profile_path = await profilesArray.map((profile) => ({
-    params: { username: profile.email.split("@")[0] },
+    params: { username: profile.email && profile.email.split("@")[0] },
   }));
 
   return {
