@@ -40,6 +40,7 @@ export default function Post(props) {
   const [hasLiked, setHasLiked] = useState(false);
   const [visibleCommentBox, setVisibleCommentBox] = useState(false);
   const [visiblePostEditModal, setVisiblePostEditModal] = useState(false);
+  const [visibleLikeModal, setVisibleLikeModal] = useState(false);
 
   const router = useRouter();
 
@@ -49,6 +50,9 @@ export default function Post(props) {
 
   function togglePostEditModal(){
     setVisiblePostEditModal(!visiblePostEditModal);
+  }
+  function toggleLikeModal(){
+    setVisibleLikeModal(!visibleLikeModal);
   }
 
   useEffect(() => {
@@ -180,6 +184,30 @@ export default function Post(props) {
           </div>
         </Modal>
 
+        {/* Modals to show who have liked this post -------------------------------------- */}
+        <Modal
+          isOpen={visibleLikeModal}
+          onRequestClose={() => {
+            toggleLikeModal();
+          }}
+          className={styles.likeModal}
+          ariaHideApp={false}
+          style={customStyles}
+        >
+          <p className={styles.likeHeading}>Likes</p>
+          <div className={styles.likeList}>
+            {
+              likes.map((like)=>
+                ( 
+                <li className={styles.likeUserdata} key={like.id}>
+                  <div>{like.data().userEmail.split("@")[0]}</div>
+                  <button onClick={()=>{router.push(`/${like.data().userEmail.split("@")[0]}`)}}>View Profile</button>
+                </li>)
+              )
+            }
+          </div>
+        </Modal>
+
       <div className={styles.post}>
         <div className={styles.authorDetails}>
           <Image
@@ -228,7 +256,7 @@ export default function Post(props) {
           </div>
         )}
         <div className={styles.likeCounts}>
-          {likes.length > 0 && <div>{likes.length} {likes.length===1?"like":"likes"}</div>}
+          {likes.length > 0 && <div onClick={toggleLikeModal} className={styles.likeText}>{likes.length} {likes.length===1?"like":"likes"}</div>}
           <div>{timeDiff}</div>
         </div>
         <div className={styles.commentSection}>

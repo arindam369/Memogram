@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getProfileData } from "../../helper/api-utils";
+import {GoSearch} from "react-icons/go";
 
 export default function Account() {
   const { data: session } = useSession();
@@ -26,6 +27,19 @@ export default function Account() {
     getPostUserDp();
   }, [postAuthorDp, session])
 
+  const [username, setUsername] = useState("");
+  function handleSearchUser(){
+    if(username.trim().length===0){
+      return;
+    }
+    router.push(`/${username}`);
+    setUsername("");
+  }
+  function handleKeyDown(event){
+    if(event.key === "Enter"){
+      handleSearchUser();
+    }
+  }
 
   return (
     <>
@@ -53,6 +67,11 @@ export default function Account() {
               </Link>
           }
         </div>
+      </div>
+
+      <div className={styles.searchBarContainer}>
+          <input type="text" placeholder="Search Memogram User" value={username} onChange={(e)=>{setUsername(e.target.value)}} onKeyDown={handleKeyDown}/>
+          <GoSearch className={styles.searchIcon} onClick={handleSearchUser}/>
       </div>
     </>
   );
