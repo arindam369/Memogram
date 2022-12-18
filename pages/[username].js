@@ -31,6 +31,7 @@ export default function ProfilePage(props) {
   const [progress, setProgress] = useState(0);
   const [profileDp, setProfileDp] = useState("");
 
+  // console.log(profileData);
 
   useEffect(() => {
     if(profileData){
@@ -38,6 +39,16 @@ export default function ProfilePage(props) {
       setBio(profileData.bio);
     }
   }, []);
+
+  useEffect(()=>{
+    async function getProfileDetails(){
+      if(profileData){
+        const userData = await getProfileData(profileData.email.split("@")[0]);
+        setBio(userData.bio);
+      }
+    }
+    getProfileDetails();
+  }, [])
 
   useEffect(()=>{
     async function getPostUserDp(){

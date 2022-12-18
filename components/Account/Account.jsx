@@ -32,7 +32,7 @@ export default function Account() {
     if(username.trim().length===0){
       return;
     }
-    router.push(`/${username}`);
+    router.push(`/${username.toLowerCase()}`);
     setUsername("");
   }
   function handleKeyDown(event){
@@ -70,7 +70,7 @@ export default function Account() {
       </div>
 
       <div className={styles.searchBarContainer}>
-          <input type="text" placeholder="Search Memogram User" value={username} onChange={(e)=>{setUsername(e.target.value)}} onKeyDown={handleKeyDown}/>
+          <input type="text" placeholder="Search Memogram Users" value={username} onChange={(e)=>{setUsername(e.target.value)}} onKeyDown={handleKeyDown}/>
           <GoSearch className={styles.searchIcon} onClick={handleSearchUser}/>
       </div>
     </>
