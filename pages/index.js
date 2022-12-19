@@ -18,6 +18,7 @@ import Head from "next/head";
 import {getDatabase, ref as ref_database, set} from "firebase/database";
 import Swal from "sweetalert2";
 import { getProfileData } from "../helper/api-utils";
+import StoryBox from "../components/StoryBox/StoryBox";
 
 export default function HomePage() {
   const { data: session } = useSession();
@@ -171,6 +172,8 @@ export default function HomePage() {
           setVisibleModal(true);
         }}
       />
+
+      <StoryBox/>
 
       <div className={styles.homeContainer}>
         <div className={styles.feeds}>

@@ -470,7 +470,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        margin: 100px auto;
+        margin: 220px auto;
         height: 185px;
         flex-direction: column;
         display: flex;
@@ -492,7 +492,7 @@
         font-size: 1.8rem;
     }
     .feeds{
-        margin-top: 185px;
+        margin-top: 155px;
         width: 600px;
     }
     .commentInput{
@@ -516,7 +516,7 @@
         width: 370px;
     }
     .feeds{
-        margin-top: 175px;
+        margin-top: 155px;
         width: 400px;
     }
     .commentInput{
@@ -535,14 +535,14 @@
 @media (max-width: 415px){
 
     .searchBarContainer{
-        width: 310px;
+        width: 340px;
     }
     .searchBarContainer input{
         padding: 6px 20px;
         width: 240px !important;
     }
     .accountDetailsContainer{
-        width: 310px;
+        width: 340px;
         margin-top: 50px;
     }
     .searchIcon{
@@ -555,7 +555,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        margin: 100px auto;
+        margin: 240px auto;
         height: 85px;
         width: 320px;
         display: flex;
@@ -1286,4 +1286,119 @@
         outline: none;
         margin-right: 9px;
     }
+}
+
+/* Story css ---------------------------------------- */
+.storyContainer{
+    width: 700px;
+    padding: 15px 15px 5px;
+    position: relative;
+    left: 80px;
+    background-color: #fff;
+    border-radius: 5px;
+    height: 135px;
+}
+.storyBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-direction: column;
+    z-index: 10;
+}
+.storyAuthor{
+    font-size: .8rem;
+    margin-top: 4px;
+}
+.storyImage{
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    padding: 1px;
+    border: 2px solid rgb(255, 101, 101);
+    position: relative;
+    z-index: 10;
+}
+.addStoryIcon{
+    color: #2d8adb;
+    position: absolute;
+    bottom: 20px;
+    right: 5px;
+    z-index: 10;
+    opacity: 1;
+    font-size: 1.1rem;
+}
+.swiper-container {
+    width: 480px;
+  }
+  
+  @media screen and (min-width: 640px) {
+    .swiper-container {
+      width: 640px;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .swiper-container {
+      width: 768px;
+    }
+}
+@media(max-width: 1230px){
+    .storyContainer{
+        width: 600px;
+    }
+    .myStoryDiv{
+        margin-left: 9px;
+    }
+}
+@media(max-width: 1100px){
+    .storyContainer{
+        width: 540px;
+    }
+}
+@media(max-width: 1000px){
+    .storyContainer{
+        width: 580px;
+        padding: 15px 15px 5px;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 10px auto 0px;
+        /* position: absolute; */
+    }
+}
+@media(max-width: 625px){
+    .storyContainer{
+        width: 420px;
+        padding: 15px 15px 5px;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 10px auto 0px;
+        /* position: absolute; */
+    }
+}
+@media(max-width: 440px){
+    .storyContainer{
+        width: 360px;
+        padding: 15px 15px 5px;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 10px auto 0px;
+        /* position: absolute; */
+    }
+}
+.storyDeleteIcon{
+    font-size: 1.3rem;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: rgb(194, 23, 23);
+    cursor: pointer;
 }

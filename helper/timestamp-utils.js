@@ -42,3 +42,8 @@ export function getTimestampDifference(foundTimestamp){
         }
     }
 }
+export function getTimestampDifference_inSeconds(foundTimestamp){
+    const currTime = new Date().getTime()/1000;
+    const timeDifference = Math.floor(currTime-foundTimestamp);
+    return timeDifference;
+}
