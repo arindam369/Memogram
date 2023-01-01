@@ -18,13 +18,14 @@ import { getDownloadURL, ref as ref_storage, uploadBytesResumable, deleteObject 
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import Swal from "sweetalert2";
 import { getTimestampDifference_inSeconds } from "../../helper/timestamp-utils";
+import { useRouter } from "next/router";
 
 export default function StoryBox(){
 
     const [stories, setStories] = useState(null);
     const [storyAuthorDp, setStoryAuthorDp] = useState(null);
     const { data: session } = useSession();
-    const [visiblleAddStoryModal, setVisibleAddStoryModal] = useState(false);
+    const [visibleAddStoryModal, setVisibleAddStoryModal] = useState(false);
     const [imageFile, setImageFile] = useState(null);
     const [file, setFile] = useState(null);
     const fileRef = useRef(null);
@@ -34,6 +35,29 @@ export default function StoryBox(){
     const [imgError, setImgError] = useState(false);
     const [storyVisibleFullScreen, setStoryVisibleFullScreen] = useState(false);
     const [storyData, setStoryData] = useState(null);
+
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
+    const minSwipeDistance = 10;  // min distance to detect a swipe
+
+    const touchStartHandler = (e)=>{
+      setTouchStart(e.targetTouches[0].clientY);
+      setTouchEnd(null);
+    }
+    const touchMoveHandler = (e)=>{
+      setTouchEnd(e.targetTouches[0].clientY);
+    }
+    const touchEndHandler = ()=>{
+      if(!touchStart || !touchEnd){
+        return;
+      }
+      const distance = touchStart - touchEnd;
+      if(distance > minSwipeDistance){
+        toggleStoryFullScreen();
+      }
+    }
+
+    const router = useRouter();
 
     useEffect(()=>{
         async function getPostUserDp(){
@@ -176,14 +200,16 @@ export default function StoryBox(){
     return (
         <>
         <Modal
-          isOpen={visiblleAddStoryModal}
+          isOpen={visibleAddStoryModal}
           onRequestClose={() => {
             setVisibleAddStoryModal(false);
           }}
           className={styles.modal}
           ariaHideApp={false}
           style={customStyles}
+          closeTimeoutMS={700}
         >
+
             <div className={styles.uploadedImageBox}>
                 {!imageFile ? (
                   <Image
@@ -276,11 +302,11 @@ export default function StoryBox(){
 
                     return (
                         <SwiperSlide className={styles.storyBox} key={story.id}>
-                            <Image src={story.data().image} height={150} width={150} alt="story" className={styles.storyImage} onClick={()=>{
+                            <Image src={story.data().image} height={150} width={150} alt="story" className={styles.storyImage}  onClick={()=>{
                                 setStoryData(story);
                                 toggleStoryFullScreen();
                             }}/>
-                            <div className={styles.storyAuthor}>{storyAuthorName}</div>
+                            <div className={styles.storyAuthor} onClick={()=>{router.push(`/${story.data().email.split("@")[0]}`)}}>{storyAuthorName}</div>
                         </SwiperSlide>
                     )
                 })}
@@ -293,18 +319,27 @@ export default function StoryBox(){
                     toggleStoryFullScreen();
                     setStoryData(null);
                 }}
-                className={styles.postFullscreenModal}
+                className={styles.storyFullscreenModal}
                 ariaHideApp={false}
                 style={customStyles}
-                closeTimeoutMS={200}
+                closeTimeoutMS={700}
                 >
-                { storyData && <div className={styles.postModalEditList}>
+                { storyData && <div className={styles.postModalEditList} onTouchStart={touchStartHandler}
+          onTouchMove={touchMoveHandler}
+          onTouchEnd={touchEndHandler}>
                     <Image
                         src={storyData.data().image}
                         height={200}
                         width={200}
                         alt="story"
-                        className={styles.myPostFullscreenImage}
+                        className={styles.storyFullscreenImage}
+                    />
+                    <Image
+                        src={storyData.data().image}
+                        height={200}
+                        width={200}
+                        alt="story"
+                        className={styles.storyFullscreenBackground}
                     />
                     <div className={styles.storyCaption}>{storyData.data().caption}</div>
                     {session && session.user.email === storyData.data().email &&

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useSession } from "next-auth/react";
 import styles from "../styles/Home.module.css";
 import Post from "../components/Post/Post";
@@ -19,6 +19,7 @@ import {getDatabase, ref as ref_database, set} from "firebase/database";
 import Swal from "sweetalert2";
 import { getProfileData } from "../helper/api-utils";
 import StoryBox from "../components/StoryBox/StoryBox";
+import SkeletonPost from "../skeletons/SkeletonPost";
 
 export default function HomePage() {
   const { data: session } = useSession();
@@ -28,7 +29,7 @@ export default function HomePage() {
   const fileRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [caption, setCaption] = useState("");
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
   const [imgError, setImgError] = useState(false);
 
   const database = getDatabase();
@@ -175,10 +176,20 @@ export default function HomePage() {
 
       <StoryBox/>
 
+      {/* skeleton ---------------- */}
+      {!posts && 
+      <div className={styles.homeContainer}>
+        <div className={styles.feeds}>
+          <SkeletonPost/>
+          <SkeletonPost/>
+          <SkeletonPost/>
+        </div>
+      </div>}
+
       <div className={styles.homeContainer}>
         <div className={styles.feeds}>
           {
-            posts.map((post)=>{
+            posts && posts.map((post)=>{
               return (
                 <Post post={post} key={post.id} onClick={handleOnClickPost} onCopy={copyToClipboard}/>
               )
@@ -190,7 +201,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {visibleModal && (
         <Modal
           isOpen={visibleModal}
           onRequestClose={() => {
@@ -199,6 +209,7 @@ export default function HomePage() {
           className={styles.modal}
           ariaHideApp={false}
           style={customStyles}
+          closeTimeoutMS={700}
         >
           {session && (
             <>
@@ -257,7 +268,6 @@ export default function HomePage() {
             </Link>
           )}
         </Modal>
-      )}
     </>
   );
 }

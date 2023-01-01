@@ -7,6 +7,7 @@ import Post from "../../components/Post/Post";
 import styles from "../../styles/Home.module.css";
 import Head from "next/head";
 import Swal from "sweetalert2";
+import SkeletonPost from "../../skeletons/SkeletonPost";
 
 export default function PostPage(){
     const router = useRouter();
@@ -75,6 +76,7 @@ export default function PostPage(){
             <div className={styles.postContainer + " "+styles.deleteMarginTop}>
                 <div className={styles.feeds}>
                     {post && <Post post={post} onClick={handleOnClickPost} onCopy={copyToClipboard}/>}
+                    {!post && !postNotFound && <SkeletonPost/>}
                     {postNotFound && <div className={styles.errorBox}>
                         <h3 className={styles.error}>Post Not Found</h3>
                     </div>}

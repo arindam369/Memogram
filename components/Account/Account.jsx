@@ -51,6 +51,7 @@ export default function Account() {
               height={50}
               width={50}
               alt="account_dp"
+              draggable="false"
               className={styles.accountDp}
               onClick={()=>{goToProfileHandler(session.user.email.split("@")[0])}}
             />

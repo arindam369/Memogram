@@ -148,7 +148,7 @@ export default function Post(props) {
     });
   }
   function handleShareWhatsapp(){
-    const wpUrl = `whatsapp://send?text=See this Memogram post by ${postData.name.split(" ")[0]}: https://memogram-nine.vercel.app/posts/${postId}`;
+    const wpUrl = `whatsapp://send?text=See this Memogram post by ${postData.name.split(" ")[0]}: https://memogram2.vercel.app/posts/${postId}`;
     window.open(wpUrl);
   }
   function goToProfileHandler(username){
@@ -172,6 +172,7 @@ export default function Post(props) {
           className={styles.postEditModal}
           ariaHideApp={false}
           style={customStyles}
+          closeTimeoutMS={700}
         >
           <div className={styles.postModalEditList}>
           {session && session.user.email === postData.email && (
@@ -193,6 +194,7 @@ export default function Post(props) {
           className={styles.likeModal}
           ariaHideApp={false}
           style={customStyles}
+          closeTimeoutMS={700}
         >
           <p className={styles.likeHeading}>Likes</p>
           <div className={styles.likeList}>
@@ -215,6 +217,7 @@ export default function Post(props) {
             height={42}
             width={42}
             alt="post_dp"
+            draggable="false"
             className={styles.postDp}
             onClick={()=>{goToProfileHandler(postData.email.split("@")[0])}}
           />
@@ -233,6 +236,7 @@ export default function Post(props) {
             height={200}
             width={200}
             alt="post"
+            draggable="false"
             className={styles.postImage}
           />
         </div>

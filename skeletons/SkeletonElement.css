@@ -1,0 +1,90 @@
+/* skeleton ---------------------------------------------------------------------- */
+.skeletonHead{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+}
+.skeletonBody{
+    height: 350px;
+}
+.skeletonFooter{
+    padding: 8px 16px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.skeleton{
+    background: white;
+}
+.skeleton__dp{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+    background-color: rgba(228, 228, 228, 0.847);
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton__fullname{
+    height: 10px;
+    width: 110px;
+    margin-bottom: 6px;
+    background-color: rgba(228, 228, 228, 0.847);
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton__email{
+    height: 10px;
+    width: 180px;
+    background-color: rgba(228, 228, 228, 0.847);
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton__postImage{
+    height: 350px;
+    background-color: rgba(228, 228, 228, 0.847);
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton__caption{
+    height: 9px;
+    width: 180px;
+    margin-bottom: 8px;
+    background-color: rgba(228, 228, 228, 0.847);
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton__loveCommentShare{
+    height: 15px;
+    display: flex;
+    align-items: center;
+}
+.skeleton__love{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: rgba(228, 228, 228, 0.847);
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton__comment{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: rgba(228, 228, 228, 0.847);
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton__share{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: rgba(228, 228, 228, 0.847);
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+    0%{
+        background-color: rgba(228, 228, 228, 0.447);
+    }
+    100%{
+        background-color: rgba(219, 219, 219, 0.847);
+    }
+}

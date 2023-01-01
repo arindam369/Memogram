@@ -198,6 +198,7 @@ export default function ProfilePage(props) {
         className={styles.editProfileModal}
         ariaHideApp={false}
         style={customStyles}
+        closeTimeoutMS={700}
       >
         <div className={styles.editProfileDiv}>
           <h4>Edit Profile</h4>
@@ -302,7 +303,6 @@ export default function ProfilePage(props) {
                   </div>
                 )}
                 <div className={styles.profileUserBio}>
-                  {/* IT&apos;24, Jadavpur University */}
                   {bio ? bio: profileData && profileData.bio}
                 </div>
               </div>
@@ -347,7 +347,7 @@ export async function getStaticProps(context) {
   const profileData = await getProfileData(username);
   const notFound = profileData ? false : true;
 
-  return { props: { profileData: profileData || null}};
+  return { props: { profileData: profileData || null}, revalidate: 60};
 }
 export async function getStaticPaths() {
   const profilesArray = await getAllProfiles();

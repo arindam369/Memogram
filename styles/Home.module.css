@@ -4,14 +4,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
-    box-shadow: 2px 2px 2px 2px rgb(232, 232, 232);
+    box-shadow: 2px 2px 2px 2px var(--navShadow);
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
     right: 0;
     height: 80px;
-    background-color: #fff;
+    background-color: var(--navBackground);
+    color: var(--navIconColor);
     z-index: 100;
 }
 .navbarContainer .leftPart{
@@ -22,24 +23,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 130px;
+    width: 170px;
+}
+.navbarContainer .rightPart .navThemeIcon{
+    cursor: pointer;
+    transition: 1s all;
 }
 .navbarContainer .rightPart .addPost{
     cursor: pointer;
     font-size: 1.3rem;
     transition: 1s all;
+    margin-left: 0px;
 }
 .navbarContainer .rightPart .homeIcon{
     cursor: pointer;
     font-size: 1.3rem;
     transition: 1s all;
 }
-.homeIcon:hover, .addPost:hover{
+.homeIcon:hover, .addPost:hover, .navThemeIcon:hover{
     transform: scale(1.2);
 }
 .navbarContainer .rightPart .signinBtn{
     font-weight: 500;
     color: rgb(90, 90, 90);
+    color: var(--navSignInColor);
 }
 
 .loginContainer{
@@ -51,7 +58,7 @@
 }
 .loginContainer h3{
     font-size: 1.8rem;
-    color: rgb(52, 52, 52);
+    color: var(--postDataColor);
     margin-bottom: 50px;
 }
 .loginContainer h3 b{
@@ -68,8 +75,8 @@
 }
 .loginBtn{
     padding: 13px 26px;
-    color: rgb(105, 105, 105);
-    background: white;
+    color: var(--signInColor);
+    background: var(--editProfileButton);
     border: 1px solid rgb(203, 203, 203);
     display: flex;
     justify-content: center;
@@ -93,8 +100,7 @@
     padding: 5px 80px;
 }
 .feeds{
-    /* border: 1px solid rgb(170, 170, 170); */
-    width: 60%;
+    width: 63%;
 }
 .myFeeds{
     display: grid;
@@ -103,17 +109,17 @@
 .account{
     width: 28%;
     position: fixed;
-    top: 110px;
+    top: 92px;
     right: 100px;
     /* background-color: #fff; */
     border-radius: 4px;
     padding: 4px 10px;
 }
 .post{
-    border: 1px solid rgb(227, 227, 227);
+    /* border: 1px solid rgba(135, 135, 135, 0.658); */
     border-radius: 4px;
     padding: 5px 0px;
-    background: white;
+    background: var(--postBackground);
     margin: 10px 0px 30px;
 }
 .myPost{
@@ -140,6 +146,7 @@
     align-items: center;
     padding: 8px 20px;
     position: relative;
+    color: var(--postDataColor);
 }
 .deleteIcon{
     position: absolute;
@@ -163,7 +170,7 @@
     cursor: pointer;
 }
 .post .authorDetails .authorNameEmail div:last-child{
-    color: rgb(84, 84, 84);
+    color: var(--postAuthorDataColor);
 }
 .post .imageBox{
     width: 100%;
@@ -179,12 +186,14 @@
 .post .postCaption{
     padding: 3px 15px 10px;
     font-size: .9rem;
+    color: var(--postDataColor);
 }
 .likeCommentShare{
     height: 40px;
     display: flex;
     align-items: center;
     padding: 5px 12px;
+    color: var(--postDataColor);
 }
 .loveIcon{
     font-size: 1.5rem;
@@ -219,11 +228,12 @@
     padding: 5px 25px 10px;
     display: flex;
     align-items: center;
+    color: var(--postDataColor);
 }
 .likeCounts div:last-child{
     margin-left: 10px;
     font-size: .75rem;
-    color: rgb(84, 84, 84); 
+    color: var(--postAuthorDataColor);
 }
 .comment{
     display: flex;
@@ -235,7 +245,7 @@
 }
 .comment .commentRight{
     font-size: .73rem;
-    color: rgb(84, 84, 84);  
+    color: var(--postAuthorDataColor)
 }
 .commentForm button{
     cursor: pointer;
@@ -248,9 +258,10 @@
     font-weight: 600;
     font-size: .9rem;
     margin-top: 5px;
+    color: var(--postDataColor);
 }
 .commentAuthorMessage{
-    color: rgb(84, 84, 84);   
+    color: var(--postAuthorDataColor);
     margin-left: 10px;
     font-size: .8rem;
     margin-top: 5px;
@@ -281,9 +292,9 @@
     z-index: 0;
 }
 .post .commentForm button{
-    background-color: #fff;
+    background-color: var(--commentButton);
     border: 0px;
-    color: #046FDB;
+    color: var(--commentButtonColor);
     font-weight: 600;
 }
 .post .commentForm button:disabled{
@@ -305,6 +316,7 @@
 .accountProfile h3{
     font-size: .85rem;
     margin: 0px;
+    color: var(--postDataColor);
 }
 .accountProfile h6{
     margin: 0px;
@@ -333,8 +345,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    background: white;
-    border: 1px solid rgb(156, 156, 156);
+    background: var(--modalBackground);
+    /* border: 1px solid rgb(156, 156, 156); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -361,6 +373,8 @@
     top: 10px;
     width: 300px;
     text-align: center;
+    background: var(--modalBackground);
+    color: var(--postDataColor);
 }
 .modal button:disabled{
     background-color: #6f7174;
@@ -374,8 +388,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    background: white;
-    border: 1px solid rgb(156, 156, 156);
+    background: var(--modalBackground);
+    /* border: 1px solid rgb(156, 156, 156); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -384,9 +398,7 @@
     border-radius: 10px;
     padding: 10px 10px;
     text-align: center;
-}
-.postModalEditList{
-
+    color: var(--postDataColor);
 }
 .postModalEditList li{
     list-style: none;
@@ -396,7 +408,7 @@
     border-radius: 6px;
 }
 .postModalEditList li:hover{
-    background-color: rgb(237, 237, 237);
+    background-color: var(--dropdownHoverBackground);
 }
 .postModalEditList .modalDeleteBtn{
     color: #EE4B2B;
@@ -476,17 +488,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 420px;
+        width: 578px;
     }
     .searchBarContainer{
-        width: 400px;
+        width: 578px;
     }
     .searchBarContainer input{
         padding: 6px 20px;
         width: 510px !important;
     }
     .accountDetailsContainer{
-        width: 400px;
+        width: 578px;
     }
     .searchIcon{
         font-size: 1.8rem;
@@ -506,14 +518,17 @@
 }
 @media (max-width: 625px){
     .searchBarContainer{
-        width: 370px;
+        width: 420px;
     }
     .searchBarContainer input{
         padding: 6px 20px;
         width: 510px !important;
     }
     .accountDetailsContainer{
-        width: 370px;
+        width: 420px;
+    }
+    .account{
+        width: 420px;
     }
     .feeds{
         margin-top: 155px;
@@ -532,17 +547,24 @@
         min-height: 230px;
     }
 }
+@media(max-width:440px){
+    .account, .accountDetailsContainer, .searchBarContainer{
+        width: 360px;
+    }
+}
 @media (max-width: 415px){
-
+    .navbarContainer .rightPart{
+        width: 150px;
+    }
     .searchBarContainer{
-        width: 340px;
+        width: 360px;
     }
     .searchBarContainer input{
         padding: 6px 20px;
         width: 240px !important;
     }
     .accountDetailsContainer{
-        width: 340px;
+        width: 360px;
         margin-top: 50px;
     }
     .searchIcon{
@@ -557,7 +579,7 @@
         bottom: 0;
         margin: 240px auto;
         height: 85px;
-        width: 320px;
+        width: 350px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -589,8 +611,7 @@
         font-size: .65rem;
         margin-top: 5px;
     }
-    .commentAuthorMessage{
-        color: rgb(84, 84, 84);   
+    .commentAuthorMessage{ 
         margin-left: 10px;
         font-size: .6rem;
         margin-top: 5px;
@@ -648,7 +669,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--accountBackground);
     padding: 20px 40px;
     border-radius: 5px;
 }
@@ -661,6 +682,7 @@
 .profileLeft .profileUsername{
     font-size: 1.1rem;
     margin: 10px 0px;
+    color: var(--postDataColor);
 }
 .profileRight{
     width: 500px;
@@ -692,9 +714,11 @@
     font-weight: 600;
     margin-bottom: 2px;
     font-size: .9rem;
+    color: var(--postDataColor);
 }
 .profileDetails .profileUserBio{
     font-size: .85rem;
+    color: var(--postAuthorDataColor);
 }
 .myPostContainer{
     display: flex;
@@ -708,7 +732,7 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
-    color: rgb(73, 73, 73);
+    color: var(--myPostHeading);
     margin-top: 10px;
 }
 .myPostContainer .myPostHeading h4{
@@ -800,7 +824,7 @@
     border-radius: 5px;
     font-weight: 600;
     cursor: pointer;
-    background-color: white;
+    background: var(--editProfileButton);
 
 }
 
@@ -867,8 +891,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    background: white;
-    border: 1px solid rgb(156, 156, 156);
+    background: var(--modalBackground);
+    /* border: 1px solid rgb(156, 156, 156); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -877,6 +901,7 @@
     border-radius: 10px;
     padding: 10px 10px;
     text-align: center;
+    color: var(--postDataColor);
 }
 .myPostTextData{
     display: flex;
@@ -913,10 +938,33 @@
 }
 .viewPost{
     font-weight: 700;
-    color: rgb(56, 102, 177);
+    color: var(--viewProfileButton);
     font-size: .8rem;
     cursor: pointer;
 }
+
+.storyFullscreenModal{
+    width: 600px;
+    height: 450px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: var(--modalBackground);
+    /* border: 1px solid rgb(156, 156, 156); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-align: center;
+    color: var(--postDataColor);
+}
+
 
 @media(max-width: 815px){
     .myPost .myImageBox{
@@ -975,7 +1023,7 @@
         max-width: 400px;
     
     }
-    .postFullscreenModal{
+    .postFullscreenModal, .storyFullscreenModal{
         width: 480px;
         height: 450px;
     }
@@ -986,7 +1034,7 @@
         max-height: 350px;
         max-width: 330px;
     }
-    .postFullscreenModal{
+    .postFullscreenModal, .storyFullscreenModal{
         width: 420px;
         height: 450px;
     }
@@ -1001,6 +1049,10 @@
         width: 360px;
         height: 440px;
     }
+    .storyFullscreenModal{
+        height: 100%;
+        width: 100%;
+    }
 }
 @media (max-width: 385px){
     .myPostFullscreenImage{
@@ -1011,6 +1063,10 @@
     .postFullscreenModal{
         width: 325px;
         height: 425px;
+    }
+    .storyFullscreenModal{
+        height: 100%;
+        width: 100%;
     }
 }
 
@@ -1024,8 +1080,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    background: white;
-    border: 1px solid rgb(156, 156, 156);
+    background: var(--modalBackground);
+    /* border: 1px solid rgb(156, 156, 156); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1047,6 +1103,9 @@
     height: 110px;
     cursor: pointer;
 }
+.editProfileDiv h4{
+    color: var(--postDataColor);
+}
 .editProgress{
     margin-top: -30px;
 }
@@ -1067,7 +1126,9 @@
     position: relative;
     top: 33px;
     width: 200px;
-    text-align: center;;
+    text-align: center;
+    background: var(--modalBackground);
+    color: var(--postDataColor);
 }
 .editProfileModal button:disabled{
     background-color: #6f7174;
@@ -1076,7 +1137,7 @@
 /* Dropdown */
 .dropdownContent {
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: var(--dropdownBackground);
     min-width: 140px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -1084,7 +1145,7 @@
     top: 90px;
 }  
 .dropdownContent a {
-    color: black;
+    color: var(--dropdownColor);
     padding: 12px 16px;
     text-decoration: none;
     display: flex;
@@ -1092,7 +1153,7 @@
     align-items: center;
 }
 .dropdownContent div {
-    color: black;
+    color: var(--dropdownColor);
     padding: 12px 16px;
     text-decoration: none;
     display: flex;
@@ -1100,20 +1161,25 @@
     align-items: center;
 }
 .dropdownContent div:hover {
-    background-color: #f1f1f1
+    background-color: var(--dropdownHoverBackground)
 }
 .userDp{
     cursor: pointer;
 }
 .dropdownIcons{
     font-size: 1.1rem;
-    color: rgb(87, 87, 87);
+    color: var(--dropdownIcons);
     margin-right: 8px;
+}
+.dropdownIcons2{
+    font-size: 1.1rem;
+    color: var(--dropdownIcons2);
+    transition: 1s all;
 }
 .profileNotFound{
     display: flex;
     justify-content: space-between;
-    background-color: white;
+    background-color: var(--modalBackground);
     width: 570px;
     align-items: center;
     border-radius: 12px;
@@ -1136,6 +1202,7 @@
 }
 .profileError h2{
     margin-bottom: 0px;
+    color: var(--postDataColor);
 }
 .profileError h5{
     margin-top: 6px;
@@ -1199,8 +1266,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    background: white;
-    border: 1px solid rgb(156, 156, 156);
+    background: var(--modalBackground);
+    /* border: 1px solid rgb(156, 156, 156); */
     display: flex;
     flex-direction: column;
     outline: none;
@@ -1213,6 +1280,7 @@
     border-bottom: 1px solid rgb(187, 187, 187);
     margin-bottom: 5px;
     font-size: .9rem;
+    color: var(--postDataColor);
 }
 .likeList{
     display: flex;
@@ -1239,22 +1307,23 @@
     width: 200px;
     text-align: left;
     padding-left: 6px;
+    color: var(--postDataColor);
 }
 .likeUserdata button{
     font-size: .7rem;
     border: 0px;
-    background-color: white;
-    color: #0b4fb4;
+    background-color: var(--modalBackground);
+    color: var(--viewProfileButton);
     font-weight: 600;
     cursor: pointer;
 }
 
 .accountDetailsContainer{
-    background-color: #fff;
+    background-color: var(--accountBackground);
     border-radius: 4px;
 }
 .searchBarContainer{
-    background-color: #fff;
+    background-color: var(--accountBackground);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -1274,6 +1343,7 @@
     /* left: 38px;
     top: 22px; */
     cursor: pointer;
+    color: var(--postDataColor);
 }
 .searchIcon:active{
     transform: scale(.96);
@@ -1294,9 +1364,12 @@
     padding: 15px 15px 5px;
     position: relative;
     left: 80px;
-    background-color: #fff;
+    background-color: var(--accountBackground);
     border-radius: 5px;
     height: 135px;
+}
+.feeds{
+    width: 700px;
 }
 .storyBox{
     display: flex;
@@ -1306,21 +1379,23 @@
     border-radius: 50%;
     cursor: pointer;
     flex-direction: column;
-    z-index: 10;
+    z-index: 10;    
 }
 .storyAuthor{
     font-size: .8rem;
     margin-top: 4px;
+    color: var(--postDataColor);
 }
 .storyImage{
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    padding: 1px;
+    padding: 1.5px;
     border: 2px solid rgb(255, 101, 101);
     position: relative;
     z-index: 10;
 }
+
 .addStoryIcon{
     color: #2d8adb;
     position: absolute;
@@ -1334,7 +1409,7 @@
     width: 480px;
   }
   
-  @media screen and (min-width: 640px) {
+@media screen and (min-width: 640px) {
     .swiper-container {
       width: 640px;
     }
@@ -1346,7 +1421,7 @@
     }
 }
 @media(max-width: 1230px){
-    .storyContainer{
+    .storyContainer, .feeds{
         width: 600px;
     }
     .myStoryDiv{
@@ -1354,7 +1429,7 @@
     }
 }
 @media(max-width: 1100px){
-    .storyContainer{
+    .storyContainer, .feeds{
         width: 540px;
     }
 }
@@ -1369,6 +1444,9 @@
         margin: 10px auto 0px;
         /* position: absolute; */
     }
+    .feeds{
+        width: 580px;
+    }
 }
 @media(max-width: 625px){
     .storyContainer{
@@ -1381,6 +1459,13 @@
         margin: 10px auto 0px;
         /* position: absolute; */
     }
+    .feeds{
+        width: 420px;
+    }
+    .post{
+        width: 420px;
+    }
+    
 }
 @media(max-width: 440px){
     .storyContainer{
@@ -1393,12 +1478,61 @@
         margin: 10px auto 0px;
         /* position: absolute; */
     }
+    .feeds{
+        width: 360px;
+    }
+    .post{
+        width: 360px;
+    }
+    
 }
 .storyDeleteIcon{
     font-size: 1.3rem;
     position: absolute;
     right: 20px;
     top: 20px;
-    color: rgb(194, 23, 23);
+    color: var(--storyDeleteIconColor);
     cursor: pointer;
+}
+/* story fullscreen image ----------- */
+.storyFullscreenImage{
+    min-height: 300px;
+    max-height: 350px;
+    max-width: 500px;
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.storyFullscreenBackground{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    filter: blur(50px);
+    opacity: 0.58;
+}
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@700&display=swap');
+.storyCaption{
+    z-index: 2;
+    position: relative;
+    font-family: 'PT Sans Caption', sans-serif;
+    font-weight: 600;
+    margin-top: 5px;
+    color: var(--storyCaption);
+}
+@media (max-width: 440px){
+    .storyFullscreenImage{
+        min-height: 600px;
+        max-height: 700px;
+    }
+    .storyFullscreenModal{
+        border-radius: 0px;
+    }
 }
