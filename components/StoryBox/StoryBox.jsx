@@ -261,8 +261,6 @@ export default function StoryBox(){
                 // navigation
                 pagination={{ clickable: true }}
                 // scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
                 >
                 {session && storyAuthorDp && <SwiperSlide className={styles.storyBox + " "+styles.myStoryDiv}>
                     <Image src={storyAuthorDp} height={150} width={150} alt="story" className={styles.storyImage} onClick={showAddStoryModal}/>

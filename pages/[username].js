@@ -347,7 +347,7 @@ export async function getStaticProps(context) {
   const profileData = await getProfileData(username);
   const notFound = profileData ? false : true;
 
-  return { props: { profileData: profileData || null} };
+  return { props: { profileData: profileData || null}};
 }
 export async function getStaticPaths() {
   const profilesArray = await getAllProfiles();
