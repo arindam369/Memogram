@@ -89,6 +89,7 @@ a {
   --viewProfileButton: #0b4fb4;
   --signInColor: rgb(105, 105, 105);
   --navSignInColor: rgb(90, 90, 90);
+  --storyTimeColor: rgb(66, 66, 66);
 }
 [theme-color="dark"]{
   --navBackground:#242526;
@@ -110,10 +111,11 @@ a {
   --dropdownIcons2: white;
   --modalBackground: #2D2D2D;
   --storyCaption: white;
-  --storyDeleteIconColor: rgba(99, 4, 4, 0.954);
+  --storyDeleteIconColor: white;
   --viewProfileButton: #5998f6;
   --signInColor: black;
   --navSignInColor: white;
+  --storyTimeColor: rgb(172, 172, 172);
 }
 html, body{
   background: var(--bodyBackground);

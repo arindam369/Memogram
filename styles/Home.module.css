@@ -960,7 +960,7 @@
     flex-direction: column;
     outline: none;
     border-radius: 10px;
-    padding: 10px 10px;
+    padding: 15px 10px 0px;
     text-align: center;
     color: var(--postDataColor);
 }
@@ -1175,6 +1175,7 @@
     font-size: 1.1rem;
     color: var(--dropdownIcons2);
     transition: 1s all;
+    margin-top: 6px;
 }
 .profileNotFound{
     display: flex;
@@ -1395,6 +1396,29 @@
     position: relative;
     z-index: 10;
 }
+.storyAuthorDp{
+    border-radius: 50%;
+    position: absolute;
+    top: 16px;
+    left: 45px;
+    height: 40px;
+    width: 40px;
+}
+.storyAuthorName{
+    position: absolute;
+    top: 26px;
+    left: 94px;
+    font-size: .8rem;
+    font-weight: 500;
+}
+.storyTimespan{
+    position: absolute;
+    top: 28px;
+    left: 230px;
+    color: var(--storyTimeColor);
+    font-size: .7rem;
+    font-weight: 500;
+}
 
 .addStoryIcon{
     color: #2d8adb;
@@ -1407,8 +1431,22 @@
 }
 .swiper-container {
     width: 480px;
-  }
-  
+}
+
+@media (max-width: 655px){
+    .storyAuthorDp{
+        top: 16px;
+        left: 15px;
+    }
+    .storyAuthorName{
+        top: 26px;
+        left: 68px;
+    }
+    .storyTimespan{
+        top: 28px;
+        left: 210px;
+    }
+}  
 @media screen and (min-width: 640px) {
     .swiper-container {
       width: 640px;

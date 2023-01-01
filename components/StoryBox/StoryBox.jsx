@@ -17,7 +17,7 @@ import Progress from "../Progress/Progress";
 import { getDownloadURL, ref as ref_storage, uploadBytesResumable, deleteObject } from "firebase/storage";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import Swal from "sweetalert2";
-import { getTimestampDifference_inSeconds } from "../../helper/timestamp-utils";
+import { getTimestampDifference, getTimestampDifference_inSeconds } from "../../helper/timestamp-utils";
 import { useRouter } from "next/router";
 
 export default function StoryBox(){
@@ -344,6 +344,9 @@ export default function StoryBox(){
                     <div className={styles.storyCaption}>{storyData.data().caption}</div>
                     {session && session.user.email === storyData.data().email &&
                     <RiDeleteBack2Fill className={styles.storyDeleteIcon} onClick={handleDeleteStory}/>}
+                    <div className={styles.storyTimespan}> {getTimestampDifference(storyData.data().timestamp.seconds)} </div>
+                    <div className={styles.storyAuthorName}>{storyData.data().email && storyData.data().email.split("@")[0]}</div>
+                    <div className={styles.storyAuthorDpDiv}>{storyData.data().dp && <Image src={storyData.data().dp} height={60} width={60} alt="storyAuthorDp" className={styles.storyAuthorDp}/>}</div>
                 </div>}
             </Modal>
         </div>

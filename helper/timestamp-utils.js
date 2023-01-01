@@ -1,7 +1,7 @@
 export function getTimestampDifference(foundTimestamp){
     const currTime = new Date().getTime()/1000;
     const timeDifference = Math.floor(currTime-foundTimestamp);
-    console.log(timeDifference);
+    
     if(timeDifference<0){
         return "0sec ago"
     }
