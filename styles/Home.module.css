@@ -176,6 +176,7 @@
     width: 100%;
     min-height: 350px;
     cursor: pointer;
+    position: relative;
 }
 .post .imageBox .postImage{
     object-fit: contain;

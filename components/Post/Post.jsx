@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { MdOutlineFavoriteBorder, MdFavorite } from "react-icons/md";
+import { MdOutlineFavoriteBorder, MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { FaRegCommentAlt } from "react-icons/fa";
-import { BsWhatsapp } from "react-icons/bs";
+import { BsHeartFill, BsWhatsapp } from "react-icons/bs";
 import { storage } from "../../firebase";
 import InputEmoji from "react-input-emoji";
 import { ref, deleteObject } from "firebase/storage";
@@ -41,6 +41,7 @@ export default function Post(props) {
   const [visibleCommentBox, setVisibleCommentBox] = useState(false);
   const [visiblePostEditModal, setVisiblePostEditModal] = useState(false);
   const [visibleLikeModal, setVisibleLikeModal] = useState(false);
+  const [visibleLoveIcon, setVisibleLoveIcon] = useState(false);
 
   const router = useRouter();
 
@@ -162,6 +163,24 @@ export default function Post(props) {
     }
   };
 
+  async function handleClickOnPostImage(event){
+    // if(event.detail === 1){
+    //   props.onClick(props.post.id);
+    // }
+    if(event.detail === 2){
+      if(session){
+        await setDoc(doc(db, "posts", postId, "likes", session.user.email), {
+          userEmail: session.user.email,
+        });
+        
+        setVisibleLoveIcon(true);
+        setTimeout(() => {
+          setVisibleLoveIcon(false);
+        }, 700);
+      }
+    }
+  }
+
   return (
     <>
         <Modal
@@ -230,7 +249,7 @@ export default function Post(props) {
 
           <BsThreeDots className={styles.deleteIcon} onClick={togglePostEditModal} />
         </div>
-        <div className={styles.imageBox} onClick={()=>{props.onClick(props.post.id);}}>
+        <div className={styles.imageBox} onClick={handleClickOnPostImage}>
           <Image
             src={postData.image}
             height={200}
@@ -239,6 +258,9 @@ export default function Post(props) {
             draggable="false"
             className={styles.postImage}
           />
+          {session && hasLiked &&
+              <MdFavorite className={visibleLoveIcon? "loveVisibleIcon loveVisible": "loveVisibleIcon"}/>
+          }
         </div>
         <div className={styles.postCaption}>{postData.caption}</div>
         {session && (

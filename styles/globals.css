@@ -148,3 +148,40 @@ html, body{
 [data-title] {
   position: relative;
 }
+
+/* love visible on double click */
+.loveVisibleIcon{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  color: rgb(255, 255, 255);
+  font-size: 7rem;
+  z-index: 1;
+  visibility: hidden;
+}
+.loveVisible{
+  visibility: visible;
+  animation: 0.5s loveGrow ease-in forwards;
+}
+@keyframes loveGrow{
+  0%{
+      transform: scale(0.8);
+      /* visibility: visible; */
+  }
+  30%{
+      transform: scale(1);
+  }
+  60%{
+      transform: scale(0.9);
+  }
+  80%{
+      transform: scale(1);
+  }
+  100%{
+      transform: scale(0.9);
+      /* visibility: hidden; */
+  }
+}
