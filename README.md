@@ -1,34 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# MemoGram
 
-First, run the development server:
+Share your lovely moments, memories with others via **MemoGram!**
+
+<img src="https://user-images.githubusercontent.com/92720594/234384319-d64d9460-6030-4fb7-bda2-9e0bbb6806cd.gif" data-canonical-src="https://user-images.githubusercontent.com/92720594/234384319-d64d9460-6030-4fb7-bda2-9e0bbb6806cd.gif" width="575" height="320" />
+<br/>
+<img src="https://user-images.githubusercontent.com/92720594/234396362-67615445-9e46-467b-812b-d52941627918.gif" data-canonical-src="https://user-images.githubusercontent.com/92720594/234396362-67615445-9e46-467b-812b-d52941627918.gif" width="575" height="320" />
+
+Link to the website: https://memogram-nine.vercel.app
+
+
+
+## Features
+
+- User can sign in directly using their Google Accounts
+- Create posts, View all posts
+- Like, Comment, Share on every posts, can share any posts directly via WhatsApp
+- User can see the persons who liked the posts
+- Profile Section available where any user can go to any user's profile and view their posts
+- Create Story that will be visible only for 24hrs
+- Dark Mode feature available for better experience
+
+
+
+## Screenshots
+
+<img src="https://user-images.githubusercontent.com/92720594/234380235-674eaf22-5add-4d26-98e4-b781308fc578.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234380235-674eaf22-5add-4d26-98e4-b781308fc578.png" width="500" height="300" />
+<br/>
+<img src="https://user-images.githubusercontent.com/92720594/234380412-f6ae5d2b-0496-4482-b488-9fbaf6487ead.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234380412-f6ae5d2b-0496-4482-b488-9fbaf6487ead.png" width="500" height="300" />
+<br/>
+<img src="https://user-images.githubusercontent.com/92720594/234380609-44922347-1ba4-4ae7-80c5-170adff36f7c.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234380609-44922347-1ba4-4ae7-80c5-170adff36f7c.png" width="500" height="300" />
+<br/>
+<img src="https://user-images.githubusercontent.com/92720594/234380775-5c20150f-c2fe-4f9d-b6f6-efb4bccb0ac7.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234380775-5c20150f-c2fe-4f9d-b6f6-efb4bccb0ac7.png" width="500" height="300" />
+
+
+
+## Run Locally
+
+Clone the project **Memogram**
 
 ```bash
-npm run dev
-# or
-yarn dev
+  git clone https://github.com/arindam369/Memogram.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+  cd Memogram
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Install all the dependencies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+  npm install
+```
 
-## Learn More
+Start the Development Server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Feedback
 
-## Deploy on Vercel
+*If you have any kind of queries, please reach out to me*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://arindam369.netlify.app)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/arindam369)
