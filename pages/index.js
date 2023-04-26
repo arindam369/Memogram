@@ -65,8 +65,8 @@ export default function HomePage() {
   // we will store user profile where key=emailID
   useEffect(()=>{
     async function addProfileData(session){
-      const username = session.user.email.split("@")[0];
-      await getProfileData(session.user.email.split("@")[0]).then((profileArray)=>{
+      const username = session.user.email.split("@")[0].replace(/[.+-]/g, "_");
+      await getProfileData(session.user.email.split("@")[0].replace(/[.+-]/g, "_")).then((profileArray)=>{
         if(!profileArray){
           set(ref_database(database, 'profiles/'+username), {
             name: session.user.name,
@@ -113,7 +113,7 @@ export default function HomePage() {
 
   async function handlePost() {
     const { name, lastModified } = file;
-    const filePath = `assets/${name}_${lastModified}`;
+    const filePath = `assets/${name}_${new Date().getTime()}`;
     const folderRef = ref_storage(storage, filePath);
 
     const uploadedFile = uploadBytesResumable(folderRef, file);

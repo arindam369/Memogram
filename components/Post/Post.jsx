@@ -91,7 +91,7 @@ export default function Post(props) {
 
   useEffect(()=>{
     async function getPostUserDp(){
-      const postProfileData = await getProfileData(postData.email.split("@")[0]);
+      const postProfileData = await getProfileData(postData.email.split("@")[0].replace(/[.+-]/g, "_"));
       const postProfileDp = postProfileData && await postProfileData.dp;
       setPostAuthorDp(postProfileDp);
     }
@@ -221,8 +221,8 @@ export default function Post(props) {
               likes.map((like)=>
                 ( 
                 <li className={styles.likeUserdata} key={like.id}>
-                  <div>{like.data().userEmail.split("@")[0]}</div>
-                  <button onClick={()=>{router.push(`/${like.data().userEmail.split("@")[0]}`)}}>View Profile</button>
+                  <div>{like.data().userEmail.split("@")[0].replace(/[.+-]/g, "_")}</div>
+                  <button onClick={()=>{router.push(`/${like.data().userEmail.split("@")[0].replace(/[.+-]/g, "_")}`)}}>View Profile</button>
                 </li>)
               )
             }
@@ -238,11 +238,11 @@ export default function Post(props) {
             alt="post_dp"
             draggable="false"
             className={styles.postDp}
-            onClick={()=>{goToProfileHandler(postData.email.split("@")[0])}}
+            onClick={()=>{goToProfileHandler(postData.email.split("@")[0].replace(/[.+-]/g, "_"))}}
           />
           <div className={styles.authorNameEmail}>
             <div 
-            onClick={()=>{goToProfileHandler(postData.email.split("@")[0])}}
+            onClick={()=>{goToProfileHandler(postData.email.split("@")[0].replace(/[.+-]/g, "_"))}}
             >
               {postData.name}</div> <div>{postData.email}</div>
           </div>

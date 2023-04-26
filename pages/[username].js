@@ -43,7 +43,7 @@ export default function ProfilePage(props) {
   useEffect(()=>{
     async function getProfileDetails(){
       if(profileData){
-        const userData = await getProfileData(profileData.email.split("@")[0]);
+        const userData = await getProfileData(profileData.email.split("@")[0].replace(/[.+-]/g, "_"));
         setBio(userData.bio);
       }
     }
@@ -53,7 +53,7 @@ export default function ProfilePage(props) {
   useEffect(()=>{
     async function getPostUserDp(){
       if(profileData){
-        const postProfileData = await getProfileData(profileData.email.split("@")[0]);
+        const postProfileData = await getProfileData(profileData.email.split("@")[0].replace(/[.+-]/g, "_"));
         const postProfileDp = postProfileData && await postProfileData.dp;
         setProfileDp(postProfileDp);
       }
@@ -95,7 +95,7 @@ export default function ProfilePage(props) {
   async function modifyProfile() {
     if (file) {
       const { name, lastModified } = file;
-      const filePath = `assets/${name}_${lastModified}`;
+      const filePath = `assets/${name}_${new Date().getTime()}`;
       const folderRef = ref_storage(storage, filePath);
 
       const uploadedFile = uploadBytesResumable(folderRef, file);
@@ -120,7 +120,7 @@ export default function ProfilePage(props) {
         () => {
           getDownloadURL(uploadedFile.snapshot.ref).then(
             async (downloadUrl) => {
-              const username = session.user.email.split("@")[0];
+              const username = session.user.email.split("@")[0].replace(/[.+-]/g, "_");
               set(ref_database(database, "profiles/" + username), {
                 name: session.user.name,
                 email: session.user.email,
@@ -141,7 +141,7 @@ export default function ProfilePage(props) {
       );
     }
     else{
-      const username = session.user.email.split("@")[0];
+      const username = session.user.email.split("@")[0].replace(/[.+-]/g, "_");
       set(ref_database(database, "profiles/" + username), {
         name: session.user.name,
         email: session.user.email,
@@ -264,7 +264,7 @@ export default function ProfilePage(props) {
             )}
             {profileData && (
               <h4 className={styles.profileUsername}>
-                {profileData.email.split("@")[0]}
+                {profileData.email.split("@")[0].replace(/[.+-]/g, "_")}
               </h4>
             )}
           </div>
@@ -352,7 +352,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const profilesArray = await getAllProfiles();
   const profile_path = await profilesArray.map((profile) => ({
-    params: { username: profile.email && profile.email.split("@")[0] },
+    params: { username: profile.email && profile.email.split("@")[0].replace(/[.+-]/g, "_") },
   }));
 
   return {

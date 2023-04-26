@@ -62,7 +62,7 @@ export default function StoryBox(){
     useEffect(()=>{
         async function getPostUserDp(){
           if(session){
-            const postProfileData = await getProfileData(session.user.email.split("@")[0]);
+            const postProfileData = await getProfileData(session.user.email.split("@")[0].replace(/[.+-]/g, "_"));
             const postProfileDp = postProfileData && await postProfileData.dp;
             setStoryAuthorDp(postProfileDp);
           }
@@ -131,7 +131,7 @@ export default function StoryBox(){
     
       async function handlePost() {
         const { name, lastModified } = file;
-        const filePath = `storyAssets/${name}_${lastModified}`;
+        const filePath = `storyAssets/${name}_${new Date().getTime()}`;
 
         const folderRef = ref_storage(storage, filePath);
     
@@ -295,7 +295,7 @@ export default function StoryBox(){
                 </SwiperSlide>}
 
                 {stories && stories.map((story)=>{
-                    let storyAuthorName = story.data().email.split("@")[0].trim();
+                    let storyAuthorName = story.data().email.split("@")[0].replace(/[.+-]/g, "_").trim();
                     if(storyAuthorName.length>10){
                         storyAuthorName = storyAuthorName.substr(0,10)+"...";
                     }
@@ -306,7 +306,7 @@ export default function StoryBox(){
                                 setStoryData(story);
                                 toggleStoryFullScreen();
                             }}/>
-                            <div className={styles.storyAuthor} onClick={()=>{router.push(`/${story.data().email.split("@")[0]}`)}}>{storyAuthorName}</div>
+                            <div className={styles.storyAuthor} onClick={()=>{router.push(`/${story.data().email.split("@")[0].replace(/[.+-]/g, "_")}`)}}>{storyAuthorName}</div>
                         </SwiperSlide>
                     )
                 })}
@@ -345,7 +345,7 @@ export default function StoryBox(){
                     {session && session.user.email === storyData.data().email &&
                     <RiDeleteBack2Fill className={styles.storyDeleteIcon} onClick={handleDeleteStory}/>}
                     <div className={styles.storyTimespan}> {getTimestampDifference(storyData.data().timestamp.seconds)} </div>
-                    <div className={styles.storyAuthorName}>{storyData.data().email && storyData.data().email.split("@")[0]}</div>
+                    <div className={styles.storyAuthorName}>{storyData.data().email && storyData.data().email.split("@")[0].replace(/[.+-]/g, "_")}</div>
                     <div className={styles.storyAuthorDpDiv}>{storyData.data().dp && <Image src={storyData.data().dp} height={60} width={60} alt="storyAuthorDp" className={styles.storyAuthorDp}/>}</div>
                 </div>}
             </Modal>

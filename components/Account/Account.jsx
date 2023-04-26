@@ -19,7 +19,7 @@ export default function Account() {
   useEffect(()=>{
     async function getPostUserDp(){
       if(session){
-        const postProfileData = await getProfileData(session.user.email.split("@")[0]);
+        const postProfileData = await getProfileData(session.user.email.split("@")[0].replace(/[.+-]/g, "_"));
         const postProfileDp = postProfileData && await postProfileData.dp;
         setPostAuthorDp(postProfileDp);
       }
@@ -53,12 +53,12 @@ export default function Account() {
               alt="account_dp"
               draggable="false"
               className={styles.accountDp}
-              onClick={()=>{goToProfileHandler(session.user.email.split("@")[0])}}
+              onClick={()=>{goToProfileHandler(session.user.email.split("@")[0].replace(/[.+-]/g, "_"))}}
             />
           )}
           {session && (
             <div className={styles.accountData}>
-              <h3 onClick={()=>{goToProfileHandler(session.user.email.split("@")[0])}}>{session.user.name}</h3>
+              <h3 onClick={()=>{goToProfileHandler(session.user.email.split("@")[0].replace(/[.+-]/g, "_"))}}>{session.user.name}</h3>
               <h6>{session.user.email}</h6>
             </div>
           )}

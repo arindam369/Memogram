@@ -22,7 +22,7 @@ export default function Navbar(props) {
 
   function goToProfileHandler(){
     if(session){
-      const username = session.user.email.split("@")[0];
+      const username = session.user.email.split("@")[0].replace(/[.+-]/g, "_");
       router.push(`/${username}`);
       setVisibleDropdown(false);
     }
@@ -32,7 +32,7 @@ export default function Navbar(props) {
     async function getPostUserDp() {
       if (session) {
         const postProfileData = await getProfileData(
-          session.user.email.split("@")[0]
+          session.user.email.split("@")[0].replace(/[.+-]/g, "_")
         );
         const postProfileDp = postProfileData && (await postProfileData.dp);
         setPostAuthorDp(postProfileDp);
