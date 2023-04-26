@@ -310,6 +310,7 @@ export default function StoryBox(){
                         </SwiperSlide>
                     )
                 })}
+                {!session && stories && stories.length===0 && <div className={styles.noStories}>No Stories Available</div>}
             </Swiper>
 
 
