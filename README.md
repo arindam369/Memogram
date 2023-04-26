@@ -25,13 +25,13 @@ Link to the website: https://memogram-nine.vercel.app
 
 ## Screenshots
 
-<img src="https://user-images.githubusercontent.com/92720594/234380235-674eaf22-5add-4d26-98e4-b781308fc578.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234380235-674eaf22-5add-4d26-98e4-b781308fc578.png" width="500" height="300" />
+<img src="https://user-images.githubusercontent.com/92720594/234478801-035636a5-9bf8-4f5a-8728-755bdba72b51.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234478801-035636a5-9bf8-4f5a-8728-755bdba72b51.png" width="500" height="300" />
 <br/>
-<img src="https://user-images.githubusercontent.com/92720594/234380412-f6ae5d2b-0496-4482-b488-9fbaf6487ead.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234380412-f6ae5d2b-0496-4482-b488-9fbaf6487ead.png" width="500" height="300" />
+<img src="https://user-images.githubusercontent.com/92720594/234478811-a33b6c25-84bd-44fb-b42f-e0b68f09697f.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234478811-a33b6c25-84bd-44fb-b42f-e0b68f09697f.png" width="500" height="300" />
 <br/>
-<img src="https://user-images.githubusercontent.com/92720594/234380609-44922347-1ba4-4ae7-80c5-170adff36f7c.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234380609-44922347-1ba4-4ae7-80c5-170adff36f7c.png" width="500" height="300" />
+<img src="https://user-images.githubusercontent.com/92720594/234478964-7e82268d-3fe7-45bb-a92d-43adbba6e388.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234478964-7e82268d-3fe7-45bb-a92d-43adbba6e388.png" width="500" height="300" />
 <br/>
-<img src="https://user-images.githubusercontent.com/92720594/234380775-5c20150f-c2fe-4f9d-b6f6-efb4bccb0ac7.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234380775-5c20150f-c2fe-4f9d-b6f6-efb4bccb0ac7.png" width="500" height="300" />
+<img src="https://user-images.githubusercontent.com/92720594/234478971-db0f4c41-f788-4b04-9c9f-b6bb39086939.png" data-canonical-src="https://user-images.githubusercontent.com/92720594/234478971-db0f4c41-f788-4b04-9c9f-b6bb39086939.png" width="500" height="300" />
 
 
 
