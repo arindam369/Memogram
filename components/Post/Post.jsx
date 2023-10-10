@@ -104,7 +104,7 @@ export default function Post(props) {
     }
     const commentText = text;
     await addDoc(collection(db, "posts", postId, "comments"), {
-      author: session.user.name,
+      author: session.user.email.split("@")[0].replace(/[.+-]/g, "_"),
       authorDP: session.user.image,
       message: commentText,
       timestamp: serverTimestamp(),
@@ -252,8 +252,8 @@ export default function Post(props) {
         <div className={styles.imageBox} onClick={handleClickOnPostImage}>
           <Image
             src={postData.image}
-            height={200}
-            width={200}
+            height={700}
+            width={700}
             alt="post"
             draggable="false"
             className={styles.postImage}
@@ -299,7 +299,7 @@ export default function Post(props) {
                       className={styles.commentAuthorDP}
                     />
                   </div>
-                  <div className={styles.commentAuthorName}>
+                  <div className={styles.commentAuthorName} onClick={()=>{goToProfileHandler(comment.data().author.toLowerCase());}}>
                     {comment.data().author}
                   </div>
                   <div className={styles.commentAuthorMessage}>

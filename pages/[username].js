@@ -345,6 +345,7 @@ export async function getStaticProps(context) {
   const { params } = context;
   const username = params.username;
   const profileData = await getProfileData(username);
+  // console.log(profileData);
   const notFound = profileData ? false : true;
 
   return { props: { profileData: profileData || null}, revalidate: 60};

@@ -20,6 +20,7 @@
     "react-input-emoji": "^4.3.0",
     "react-modal": "^3.16.1",
     "react-toastify": "^9.1.1",
+    "sharp": "^0.32.6",
     "sweetalert2": "^11.6.15",
     "swiper": "^8.4.5",
     "use-local-storage": "^2.3.6"
