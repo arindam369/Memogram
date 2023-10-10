@@ -40,13 +40,13 @@ Link to the website: https://memogram-nine.vercel.app
 Clone the project **Memogram**
 
 ```bash
-  git clone https://github.com/arindam369/Memogram2.git
+  git clone https://github.com/arindam369/Memogram.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd Memogram2
+  cd Memogram
 ```
 
 Install all the dependencies
